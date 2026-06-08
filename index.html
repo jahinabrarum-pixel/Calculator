@@ -1,1062 +1,1380 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ABRAR CALC</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg-deep: #020408;
-        --bg-panel: #080d14;
-        --bg-card: #0d1520;
-        --bg-btn: #0f1c2e;
-        --bg-btn-hover: #162540;
-        --accent-cyan: #00e5ff;
-        --accent-blue: #2979ff;
-        --accent-green: #00e676;
-        --accent-red: #ff1744;
-        --accent-orange: #ff9100;
-        --text-primary: #e8f4fd;
-        --text-dim: #4a7599;
-        --border: rgba(0, 229, 255, 0.12);
-        --glow-cyan:
-          0 0 20px rgba(0, 229, 255, 0.4), 0 0 60px rgba(0, 229, 255, 0.1);
-        --glow-blue: 0 0 20px rgba(41, 121, 255, 0.5);
-        --glow-green: 0 0 20px rgba(0, 230, 118, 0.4);
-        --glow-red: 0 0 20px rgba(255, 23, 68, 0.4);
-      }
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>NEXUS CALC — Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   DARK THEME (default)
+═══════════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg-root:        #020408;
+  --bg-panel:       #080d14;
+  --bg-card:        #0d1520;
+  --bg-btn:         #0e1b2d;
+  --bg-btn-h:       #162540;
+  --bg-display:     #020810;
+  --border:         rgba(0,229,255,0.10);
+  --border-h:       rgba(0,229,255,0.35);
+  --text-main:      #dff4ff;
+  --text-dim:       #3e6a8a;
+  --text-expr:      #2d7aaa;
+  --accent-a:       #00e5ff;
+  --accent-b:       #2979ff;
+  --accent-c:       #00e676;
+  --accent-d:       #ff1744;
+  --accent-e:       #ff9100;
+  --accent-f:       #e040fb;
+  --glow-a: 0 0 18px rgba(0,229,255,0.45),0 0 50px rgba(0,229,255,0.12);
+  --glow-b: 0 0 18px rgba(41,121,255,0.5);
+  --glow-c: 0 0 18px rgba(0,230,118,0.4);
+  --glow-d: 0 0 18px rgba(255,23,68,0.4);
+  --glow-e: 0 0 18px rgba(255,145,0,0.4);
+  --shadow-card: 0 30px 80px rgba(0,0,0,0.85),0 0 0 1px rgba(0,229,255,0.04);
+  --grid-line:      rgba(0,229,255,0.025);
+  --orb1: rgba(0,229,255,0.045);
+  --orb2: rgba(41,121,255,0.05);
+  --orb3: rgba(0,230,118,0.03);
+  --particle-opacity: 0.7;
+  --eq-bg: linear-gradient(135deg,#001f80,#2979ff);
+  --eq-shadow: 0 0 20px rgba(41,121,255,0.4);
+  --toggle-track: #0d1520;
+  --toggle-track-border: rgba(0,229,255,0.25);
+  --toggle-knob-bg: var(--accent-a);
+  --toggle-knob-shadow: 0 0 12px var(--accent-a);
+  --header-glow: drop-shadow(0 0 12px rgba(0,229,255,0.5));
+  --scanline: rgba(0,0,0,0.06);
+  --corner-color: rgba(0,229,255,0.55);
+  --status-live: #00e676;
+  --chip-border: rgba(0,229,255,0.12);
+  --chip-active-color: var(--accent-a);
+  --chip-active-border: var(--accent-a);
+  --chip-active-shadow: 0 0 8px rgba(0,229,255,0.35);
+  --footer-color: rgba(62,106,138,0.45);
+  --fn-color: var(--accent-e);
+  --fn-border: rgba(255,145,0,0.14);
+  --fn-bg: rgba(255,145,0,0.04);
+  --fn-bg-h: rgba(255,145,0,0.12);
+  --fn-glow: 0 0 14px rgba(255,145,0,0.35);
+  --mem-color: var(--accent-c);
+  --mem-border: rgba(0,230,118,0.14);
+  --mem-bg: rgba(0,230,118,0.04);
+  --mem-bg-h: rgba(0,230,118,0.12);
+  --clr-color: var(--accent-d);
+  --clr-border: rgba(255,23,68,0.2);
+  --clr-bg: rgba(255,23,68,0.07);
+  --clr-bg-h: rgba(255,23,68,0.16);
+  --op-color: var(--accent-a);
+  --op-border: rgba(0,229,255,0.14);
+  --op-bg: rgba(0,229,255,0.05);
+  --op-bg-h: rgba(0,229,255,0.13);
+  --num-bg-h: rgba(255,255,255,0.055);
+  --back-color: #ffcc00;
+  --display-glow: 0 0 22px rgba(0,229,255,0.22);
+}
 
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+/* ═══════════════════════════════════════════════
+   LIGHT THEME
+═══════════════════════════════════════════════ */
+[data-theme="light"] {
+  --bg-root:        #e8f0f7;
+  --bg-panel:       #f0f6fc;
+  --bg-card:        #ffffff;
+  --bg-btn:         #f5f9fd;
+  --bg-btn-h:       #e3eef8;
+  --bg-display:     #ffffff;
+  --border:         rgba(0,100,200,0.12);
+  --border-h:       rgba(0,100,200,0.4);
+  --text-main:      #0a1a2e;
+  --text-dim:       #6a90b0;
+  --text-expr:      #7aaacc;
+  --accent-a:       #0077cc;
+  --accent-b:       #1155ee;
+  --accent-c:       #008844;
+  --accent-d:       #cc1133;
+  --accent-e:       #cc6600;
+  --accent-f:       #8800cc;
+  --glow-a: 0 0 14px rgba(0,119,204,0.3);
+  --glow-b: 0 0 14px rgba(17,85,238,0.35);
+  --glow-c: 0 0 14px rgba(0,136,68,0.3);
+  --glow-d: 0 0 14px rgba(204,17,51,0.3);
+  --glow-e: 0 0 14px rgba(204,102,0,0.3);
+  --shadow-card: 0 20px 60px rgba(0,60,130,0.12),0 0 0 1px rgba(0,100,200,0.08);
+  --grid-line:      rgba(0,100,200,0.04);
+  --orb1: rgba(0,119,204,0.05);
+  --orb2: rgba(17,85,238,0.04);
+  --orb3: rgba(0,136,68,0.03);
+  --particle-opacity: 0.35;
+  --eq-bg: linear-gradient(135deg,#0044aa,#1155ee);
+  --eq-shadow: 0 0 16px rgba(17,85,238,0.35);
+  --toggle-track: #ddeeff;
+  --toggle-track-border: rgba(0,100,200,0.2);
+  --toggle-knob-bg: #f5a623;
+  --toggle-knob-shadow: 0 0 10px rgba(245,166,35,0.5);
+  --header-glow: drop-shadow(0 0 8px rgba(0,119,204,0.35));
+  --scanline: rgba(0,0,0,0.015);
+  --corner-color: rgba(0,119,204,0.4);
+  --status-live: #008844;
+  --chip-border: rgba(0,100,200,0.12);
+  --chip-active-color: var(--accent-a);
+  --chip-active-border: var(--accent-a);
+  --chip-active-shadow: 0 0 7px rgba(0,119,204,0.3);
+  --footer-color: rgba(100,140,170,0.5);
+  --fn-color: var(--accent-e);
+  --fn-border: rgba(204,102,0,0.2);
+  --fn-bg: rgba(204,102,0,0.04);
+  --fn-bg-h: rgba(204,102,0,0.1);
+  --fn-glow: 0 0 12px rgba(204,102,0,0.25);
+  --mem-color: var(--accent-c);
+  --mem-border: rgba(0,136,68,0.2);
+  --mem-bg: rgba(0,136,68,0.04);
+  --mem-bg-h: rgba(0,136,68,0.1);
+  --clr-color: var(--accent-d);
+  --clr-border: rgba(204,17,51,0.2);
+  --clr-bg: rgba(204,17,51,0.04);
+  --clr-bg-h: rgba(204,17,51,0.12);
+  --op-color: var(--accent-a);
+  --op-border: rgba(0,119,204,0.2);
+  --op-bg: rgba(0,119,204,0.05);
+  --op-bg-h: rgba(0,119,204,0.12);
+  --num-bg-h: rgba(0,60,130,0.06);
+  --back-color: #cc8800;
+  --display-glow: 0 2px 12px rgba(0,119,204,0.12);
+}
 
-      /* body {
-        min-height: 100vh;
-        background: var(--bg-deep);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Share Tech Mono", monospace;
-        overflow: hidden;
-        position: relative;
-      } */
+/* ═══════════════════════════════════════════════
+   NEON THEME
+═══════════════════════════════════════════════ */
+[data-theme="neon"] {
+  --bg-root:        #000000;
+  --bg-panel:       #050505;
+  --bg-card:        #080808;
+  --bg-btn:         #0a0a0a;
+  --bg-btn-h:       #111111;
+  --bg-display:     #020202;
+  --border:         rgba(255,0,255,0.12);
+  --border-h:       rgba(255,0,255,0.5);
+  --text-main:      #ffffff;
+  --text-dim:       #552255;
+  --text-expr:      #aa44aa;
+  --accent-a:       #ff00ff;
+  --accent-b:       #00ffff;
+  --accent-c:       #00ff88;
+  --accent-d:       #ff0044;
+  --accent-e:       #ffee00;
+  --accent-f:       #ff4400;
+  --glow-a: 0 0 20px rgba(255,0,255,0.6),0 0 60px rgba(255,0,255,0.2);
+  --glow-b: 0 0 20px rgba(0,255,255,0.6);
+  --glow-c: 0 0 20px rgba(0,255,136,0.5);
+  --glow-d: 0 0 20px rgba(255,0,68,0.5);
+  --glow-e: 0 0 20px rgba(255,238,0,0.5);
+  --shadow-card: 0 0 0 1px rgba(255,0,255,0.08),0 30px 80px rgba(0,0,0,0.95);
+  --grid-line:      rgba(255,0,255,0.03);
+  --orb1: rgba(255,0,255,0.04);
+  --orb2: rgba(0,255,255,0.04);
+  --orb3: rgba(0,255,136,0.03);
+  --particle-opacity: 0.8;
+  --eq-bg: linear-gradient(135deg,#440044,#ff00ff);
+  --eq-shadow: 0 0 25px rgba(255,0,255,0.5);
+  --toggle-track: #0a0a0a;
+  --toggle-track-border: rgba(255,0,255,0.3);
+  --toggle-knob-bg: var(--accent-a);
+  --toggle-knob-shadow: 0 0 14px var(--accent-a),0 0 30px rgba(255,0,255,0.3);
+  --header-glow: drop-shadow(0 0 14px rgba(255,0,255,0.7));
+  --scanline: rgba(255,0,255,0.03);
+  --corner-color: rgba(255,0,255,0.6);
+  --status-live: #00ff88;
+  --chip-border: rgba(255,0,255,0.15);
+  --chip-active-color: var(--accent-a);
+  --chip-active-border: var(--accent-a);
+  --chip-active-shadow: 0 0 10px rgba(255,0,255,0.5);
+  --footer-color: rgba(85,34,85,0.6);
+  --fn-color: var(--accent-e);
+  --fn-border: rgba(255,238,0,0.18);
+  --fn-bg: rgba(255,238,0,0.04);
+  --fn-bg-h: rgba(255,238,0,0.1);
+  --fn-glow: 0 0 16px rgba(255,238,0,0.4);
+  --mem-color: var(--accent-c);
+  --mem-border: rgba(0,255,136,0.18);
+  --mem-bg: rgba(0,255,136,0.04);
+  --mem-bg-h: rgba(0,255,136,0.1);
+  --clr-color: var(--accent-d);
+  --clr-border: rgba(255,0,68,0.25);
+  --clr-bg: rgba(255,0,68,0.06);
+  --clr-bg-h: rgba(255,0,68,0.14);
+  --op-color: var(--accent-b);
+  --op-border: rgba(0,255,255,0.18);
+  --op-bg: rgba(0,255,255,0.05);
+  --op-bg-h: rgba(0,255,255,0.12);
+  --num-bg-h: rgba(255,255,255,0.04);
+  --back-color: var(--accent-e);
+  --display-glow: 0 0 25px rgba(255,0,255,0.2);
+}
 
-      body {
-        min-height: 100vh;
-        background: var(--bg-deep);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Share Tech Mono", monospace;
-        overflow-x: hidden;
-        overflow-y: auto;
-        position: relative;
-        padding: 20px 0;
-      }
+/* ═══════════════════════════════════════════════
+   AMBER (Retro CRT) THEME
+═══════════════════════════════════════════════ */
+[data-theme="amber"] {
+  --bg-root:        #0a0600;
+  --bg-panel:       #110900;
+  --bg-card:        #160c00;
+  --bg-btn:         #1a0f00;
+  --bg-btn-h:       #221500;
+  --bg-display:     #0a0600;
+  --border:         rgba(255,160,0,0.12);
+  --border-h:       rgba(255,160,0,0.4);
+  --text-main:      #ffe8a0;
+  --text-dim:       #664400;
+  --text-expr:      #885500;
+  --accent-a:       #ffaa00;
+  --accent-b:       #ff8800;
+  --accent-c:       #ffcc44;
+  --accent-d:       #ff4400;
+  --accent-e:       #ffee00;
+  --accent-f:       #ff6600;
+  --glow-a: 0 0 18px rgba(255,170,0,0.5),0 0 50px rgba(255,170,0,0.15);
+  --glow-b: 0 0 18px rgba(255,136,0,0.5);
+  --glow-c: 0 0 18px rgba(255,204,68,0.4);
+  --glow-d: 0 0 18px rgba(255,68,0,0.4);
+  --glow-e: 0 0 18px rgba(255,238,0,0.4);
+  --shadow-card: 0 30px 80px rgba(0,0,0,0.9),0 0 0 1px rgba(255,160,0,0.05);
+  --grid-line:      rgba(255,160,0,0.025);
+  --orb1: rgba(255,170,0,0.04);
+  --orb2: rgba(255,136,0,0.04);
+  --orb3: rgba(255,204,68,0.03);
+  --particle-opacity: 0.6;
+  --eq-bg: linear-gradient(135deg,#441100,#ff8800);
+  --eq-shadow: 0 0 20px rgba(255,136,0,0.4);
+  --toggle-track: #160c00;
+  --toggle-track-border: rgba(255,160,0,0.25);
+  --toggle-knob-bg: var(--accent-a);
+  --toggle-knob-shadow: 0 0 12px var(--accent-a);
+  --header-glow: drop-shadow(0 0 12px rgba(255,170,0,0.55));
+  --scanline: rgba(255,160,0,0.03);
+  --corner-color: rgba(255,170,0,0.5);
+  --status-live: #ffcc44;
+  --chip-border: rgba(255,160,0,0.12);
+  --chip-active-color: var(--accent-a);
+  --chip-active-border: var(--accent-a);
+  --chip-active-shadow: 0 0 8px rgba(255,170,0,0.35);
+  --footer-color: rgba(102,68,0,0.5);
+  --fn-color: var(--accent-e);
+  --fn-border: rgba(255,238,0,0.15);
+  --fn-bg: rgba(255,238,0,0.03);
+  --fn-bg-h: rgba(255,238,0,0.09);
+  --fn-glow: 0 0 14px rgba(255,238,0,0.35);
+  --mem-color: var(--accent-c);
+  --mem-border: rgba(255,204,68,0.15);
+  --mem-bg: rgba(255,204,68,0.03);
+  --mem-bg-h: rgba(255,204,68,0.09);
+  --clr-color: var(--accent-d);
+  --clr-border: rgba(255,68,0,0.22);
+  --clr-bg: rgba(255,68,0,0.06);
+  --clr-bg-h: rgba(255,68,0,0.14);
+  --op-color: var(--accent-a);
+  --op-border: rgba(255,170,0,0.15);
+  --op-bg: rgba(255,170,0,0.04);
+  --op-bg-h: rgba(255,170,0,0.12);
+  --num-bg-h: rgba(255,200,0,0.05);
+  --back-color: var(--accent-e);
+  --display-glow: 0 0 22px rgba(255,170,0,0.22);
+}
 
-      /* Animated grid background */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
-        animation: gridMove 20s linear infinite;
-        pointer-events: none;
-      }
+/* ═══════════════════════════════════════════════
+   MATRIX (Green) THEME
+═══════════════════════════════════════════════ */
+[data-theme="matrix"] {
+  --bg-root:        #000400;
+  --bg-panel:       #010801;
+  --bg-card:        #020d02;
+  --bg-btn:         #031003;
+  --bg-btn-h:       #041604;
+  --bg-display:     #000400;
+  --border:         rgba(0,255,65,0.10);
+  --border-h:       rgba(0,255,65,0.35);
+  --text-main:      #ccffcc;
+  --text-dim:       #1a5520;
+  --text-expr:      #2a7730;
+  --accent-a:       #00ff41;
+  --accent-b:       #00dd33;
+  --accent-c:       #88ff88;
+  --accent-d:       #ff2200;
+  --accent-e:       #aaffaa;
+  --accent-f:       #00ff99;
+  --glow-a: 0 0 18px rgba(0,255,65,0.5),0 0 50px rgba(0,255,65,0.12);
+  --glow-b: 0 0 18px rgba(0,221,51,0.5);
+  --glow-c: 0 0 18px rgba(136,255,136,0.4);
+  --glow-d: 0 0 18px rgba(255,34,0,0.4);
+  --glow-e: 0 0 18px rgba(170,255,170,0.4);
+  --shadow-card: 0 30px 80px rgba(0,0,0,0.92),0 0 0 1px rgba(0,255,65,0.04);
+  --grid-line:      rgba(0,255,65,0.025);
+  --orb1: rgba(0,255,65,0.04);
+  --orb2: rgba(0,221,51,0.04);
+  --orb3: rgba(136,255,136,0.03);
+  --particle-opacity: 0.65;
+  --eq-bg: linear-gradient(135deg,#002200,#00aa33);
+  --eq-shadow: 0 0 20px rgba(0,255,65,0.35);
+  --toggle-track: #020d02;
+  --toggle-track-border: rgba(0,255,65,0.25);
+  --toggle-knob-bg: var(--accent-a);
+  --toggle-knob-shadow: 0 0 12px var(--accent-a);
+  --header-glow: drop-shadow(0 0 12px rgba(0,255,65,0.6));
+  --scanline: rgba(0,255,65,0.025);
+  --corner-color: rgba(0,255,65,0.55);
+  --status-live: var(--accent-a);
+  --chip-border: rgba(0,255,65,0.12);
+  --chip-active-color: var(--accent-a);
+  --chip-active-border: var(--accent-a);
+  --chip-active-shadow: 0 0 8px rgba(0,255,65,0.35);
+  --footer-color: rgba(26,85,32,0.5);
+  --fn-color: var(--accent-e);
+  --fn-border: rgba(170,255,170,0.14);
+  --fn-bg: rgba(170,255,170,0.03);
+  --fn-bg-h: rgba(170,255,170,0.09);
+  --fn-glow: 0 0 14px rgba(170,255,170,0.35);
+  --mem-color: var(--accent-c);
+  --mem-border: rgba(136,255,136,0.15);
+  --mem-bg: rgba(136,255,136,0.03);
+  --mem-bg-h: rgba(136,255,136,0.1);
+  --clr-color: var(--accent-d);
+  --clr-border: rgba(255,34,0,0.22);
+  --clr-bg: rgba(255,34,0,0.05);
+  --clr-bg-h: rgba(255,34,0,0.14);
+  --op-color: var(--accent-a);
+  --op-border: rgba(0,255,65,0.14);
+  --op-bg: rgba(0,255,65,0.05);
+  --op-bg-h: rgba(0,255,65,0.12);
+  --num-bg-h: rgba(0,255,65,0.04);
+  --back-color: var(--accent-e);
+  --display-glow: 0 0 22px rgba(0,255,65,0.2);
+}
 
-      /* Glowing orbs */
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background:
-          radial-gradient(
-            ellipse 600px 400px at 20% 50%,
-            rgba(0, 229, 255, 0.04) 0%,
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 400px 600px at 80% 20%,
-            rgba(41, 121, 255, 0.05) 0%,
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 300px 300px at 60% 80%,
-            rgba(0, 230, 118, 0.03) 0%,
-            transparent 70%
-          );
-        pointer-events: none;
-      }
+/* ═══════════════════════════════════════════════
+   BASE RESET & LAYOUT
+═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      @keyframes gridMove {
-        0% {
-          transform: translateY(0);
-        }
-        100% {
-          transform: translateY(40px);
-        }
-      }
+html { font-size: 16px; }
 
-      /* Floating particles */
-      .particles {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-      }
-      .particle {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: var(--accent-cyan);
-        border-radius: 50%;
-        animation: float linear infinite;
-        opacity: 0;
-      }
-      @keyframes float {
-        0% {
-          transform: translateY(100vh) translateX(0);
-          opacity: 0;
-        }
-        10% {
-          opacity: 0.6;
-        }
-        90% {
-          opacity: 0.3;
-        }
-        100% {
-          transform: translateY(-10vh) translateX(30px);
-          opacity: 0;
-        }
-      }
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg-root);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Share Tech Mono', monospace;
+  transition: background 0.4s ease;
+  overflow-x: hidden;
+  position: relative;
+  padding: clamp(10px, 3vw, 40px);
+}
 
-      /* Main wrapper */
-      .wrapper {
-        position: relative;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-        padding: 20px;
-      }
+/* Animated background grid */
+.bg-grid {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: clamp(20px,4vw,40px) clamp(20px,4vw,40px);
+  animation: gridDrift 25s linear infinite;
+  transition: background-image 0.4s;
+}
+@keyframes gridDrift { 0%{transform:translateY(0)} 100%{transform:translateY(40px)} }
 
-      /* Header */
-      .header {
-        text-align: center;
-        letter-spacing: 0.4em;
-      }
-      .header-title {
-        font-family: "Orbitron", sans-serif;
-        font-size: clamp(18px, 4vw, 26px);
-        font-weight: 900;
-        background: linear-gradient(
-          90deg,
-          var(--accent-cyan),
-          var(--accent-blue),
-          var(--accent-cyan)
-        );
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: shimmer 3s linear infinite;
-        text-shadow: none;
-      }
-      @keyframes shimmer {
-        0% {
-          background-position: 0% center;
-        }
-        100% {
-          background-position: 200% center;
-        }
-      }
-      .header-sub {
-        font-size: 9px;
-        color: var(--text-dim);
-        letter-spacing: 0.6em;
-        margin-top: 4px;
-      }
+/* Background orbs */
+.bg-orbs {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 55vw 40vh at 15% 50%, var(--orb1) 0%, transparent 70%),
+    radial-gradient(ellipse 45vw 55vh at 85% 20%, var(--orb2) 0%, transparent 70%),
+    radial-gradient(ellipse 35vw 35vh at 60% 80%, var(--orb3) 0%, transparent 70%);
+  transition: background 0.5s;
+}
 
-      /* Calculator container */
-      .calc {
-        background: var(--bg-panel);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 20px;
-        width: min(360px, 95vw);
-        box-shadow:
-          0 0 0 1px rgba(0, 229, 255, 0.05),
-          0 0 40px rgba(0, 0, 0, 0.8),
-          0 0 80px rgba(0, 229, 255, 0.05),
-          inset 0 1px 0 rgba(0, 229, 255, 0.1);
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-      }
+/* Particles canvas */
+#particles { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
 
-      /* Corner accents */
-      .calc::before,
-      .calc::after {
-        content: "";
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        border-color: var(--accent-cyan);
-        border-style: solid;
-        opacity: 0.5;
-      }
-      .calc::before {
-        top: 8px;
-        left: 8px;
-        border-width: 2px 0 0 2px;
-        border-radius: 4px 0 0 0;
-      }
-      .calc::after {
-        bottom: 8px;
-        right: 8px;
-        border-width: 0 2px 2px 0;
-        border-radius: 0 0 4px 4px;
-      }
+/* ═══════════════════════════════════════════════
+   THEME TOGGLE PANEL  (advanced)
+═══════════════════════════════════════════════ */
+.theme-panel {
+  position: fixed;
+  top: clamp(10px,2vw,20px);
+  right: clamp(10px,2vw,20px);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
 
-      /* Status bar */
-      .status-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-        padding: 0 4px;
-      }
-      .status-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        animation: pulse 2s ease-in-out infinite;
-      }
-      .status-dot.green {
-        background: var(--accent-green);
-        box-shadow: 0 0 8px var(--accent-green);
-      }
-      .status-dot.blue {
-        background: var(--accent-blue);
-        box-shadow: 0 0 8px var(--accent-blue);
-        animation-delay: 0.5s;
-      }
-      .status-dot.cyan {
-        background: var(--accent-cyan);
-        box-shadow: 0 0 8px var(--accent-cyan);
-        animation-delay: 1s;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.4;
-          transform: scale(0.7);
-        }
-      }
-      .status-text {
-        font-size: 8px;
-        color: var(--text-dim);
-        letter-spacing: 0.3em;
-      }
-      .mode-tag {
-        font-size: 8px;
-        color: var(--accent-cyan);
-        border: 1px solid rgba(0, 229, 255, 0.3);
-        padding: 2px 8px;
-        border-radius: 20px;
-        letter-spacing: 0.2em;
-      }
+/* Main toggle button */
+.toggle-btn {
+  position: relative;
+  width: clamp(52px,8vw,64px);
+  height: clamp(28px,4vw,34px);
+  background: var(--toggle-track);
+  border: 1px solid var(--toggle-track-border);
+  border-radius: 999px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.toggle-btn:hover { box-shadow: 0 2px 16px rgba(0,0,0,0.4), var(--glow-a); }
+.toggle-knob {
+  position: absolute;
+  top: 3px; left: 3px;
+  width: calc(clamp(28px,4vw,34px) - 8px);
+  height: calc(clamp(28px,4vw,34px) - 8px);
+  border-radius: 50%;
+  background: var(--toggle-knob-bg);
+  box-shadow: var(--toggle-knob-shadow);
+  transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), background 0.3s, box-shadow 0.3s;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+}
+[data-theme="light"] .toggle-knob { transform: translateX(calc(clamp(52px,8vw,64px) - clamp(28px,4vw,34px))); }
 
-      /* Display area */
-      .display {
-        background: var(--bg-deep);
-        border: 1px solid rgba(0, 229, 255, 0.08);
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 16px;
-        position: relative;
-        min-height: 110px;
-        overflow: hidden;
-      }
-      .display::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--accent-cyan),
-          transparent
-        );
-        opacity: 0.4;
-      }
-      /* Scanline effect */
-      .display::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 2px,
-          rgba(0, 0, 0, 0.05) 2px,
-          rgba(0, 0, 0, 0.05) 4px
-        );
-        pointer-events: none;
-        border-radius: 12px;
-      }
+/* Theme picker dropdown */
+.theme-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  opacity: 0;
+  transform: translateY(-8px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(.34,1.3,.64,1);
+  min-width: 130px;
+}
+.theme-picker.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.theme-picker-label {
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  color: var(--text-dim);
+  text-align: center;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+.theme-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.18s;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--text-main);
+  letter-spacing: 0.15em;
+  outline: none;
+  width: 100%;
+  text-align: left;
+}
+.theme-opt:hover { background: var(--bg-btn-h); border-color: var(--border-h); }
+.theme-opt.active { border-color: var(--accent-a); color: var(--accent-a); background: var(--op-bg); }
+.theme-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
 
-      .expression {
-        font-size: 11px;
-        color: var(--text-dim);
-        text-align: right;
-        min-height: 20px;
-        letter-spacing: 0.1em;
-        word-break: break-all;
-        margin-bottom: 8px;
-      }
-      .result {
-        font-family: "Orbitron", sans-serif;
-        font-size: clamp(28px, 8vw, 40px);
-        font-weight: 700;
-        text-align: right;
-        color: var(--text-primary);
-        letter-spacing: 0.05em;
-        text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-        transition: all 0.15s ease;
-        word-break: break-all;
-        line-height: 1.1;
-      }
-      .result.error {
-        color: var(--accent-red);
-        text-shadow: var(--glow-red);
-        font-size: 20px;
-      }
-      .result.flash {
-        animation: displayFlash 0.2s ease;
-      }
-      @keyframes displayFlash {
-        0% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-          color: var(--accent-cyan);
-        }
-        100% {
-          opacity: 1;
-        }
-      }
+/* ═══════════════════════════════════════════════
+   WRAPPER & HEADER
+═══════════════════════════════════════════════ */
+.wrapper {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: clamp(8px,1.5vh,16px);
+  width: 100%;
+  max-width: 460px;
+}
 
-      /* Memory indicator */
-      .memory-bar {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 12px;
-        flex-wrap: wrap;
-      }
-      .mem-chip {
-        font-size: 8px;
-        color: var(--text-dim);
-        border: 1px solid rgba(0, 229, 255, 0.1);
-        border-radius: 20px;
-        padding: 3px 8px;
-        letter-spacing: 0.2em;
-        transition: all 0.2s;
-      }
-      .mem-chip.active {
-        color: var(--accent-cyan);
-        border-color: var(--accent-cyan);
-        box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
-      }
+.header {
+  text-align: center;
+  letter-spacing: 0.35em;
+}
+.header-title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: clamp(16px,4.5vw,28px);
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-b), var(--accent-a));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+  filter: var(--header-glow);
+  transition: filter 0.4s;
+}
+@keyframes shimmer { 0%{background-position:0% center} 100%{background-position:200% center} }
+.header-sub {
+  font-size: clamp(7px,1.5vw,9px);
+  color: var(--text-dim);
+  letter-spacing: 0.5em;
+  margin-top: 3px;
+  transition: color 0.4s;
+}
 
-      /* Button grid */
-      .btn-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-      }
+/* ═══════════════════════════════════════════════
+   CALCULATOR CARD
+═══════════════════════════════════════════════ */
+.calc {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: clamp(14px,3vw,22px);
+  padding: clamp(12px,2.5vw,22px);
+  width: 100%;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
 
-      /* Buttons */
-      .btn {
-        position: relative;
-        padding: 0;
-        height: 58px;
-        border: 1px solid rgba(0, 229, 255, 0.08);
-        border-radius: 10px;
-        background: var(--bg-btn);
-        color: var(--text-primary);
-        font-family: "Share Tech Mono", monospace;
-        font-size: 14px;
-        cursor: pointer;
-        transition: all 0.15s ease;
-        overflow: hidden;
-        outline: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        letter-spacing: 0.05em;
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .btn::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.03) 0%,
-          transparent 60%
-        );
-        pointer-events: none;
-      }
-      .btn::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.08),
-          transparent
-        );
-      }
+/* Corner decorators */
+.corner { position: absolute; width: clamp(20px,4vw,30px); height: clamp(20px,4vw,30px); }
+.corner-tl { top: 8px; left: 8px;  border-top: 2px solid var(--corner-color); border-left: 2px solid var(--corner-color); border-radius: 5px 0 0 0; }
+.corner-tr { top: 8px; right: 8px; border-top: 2px solid var(--corner-color); border-right: 2px solid var(--corner-color); border-radius: 0 5px 0 0; }
+.corner-bl { bottom: 8px; left: 8px;  border-bottom: 2px solid var(--corner-color); border-left: 2px solid var(--corner-color); border-radius: 0 0 0 5px; }
+.corner-br { bottom: 8px; right: 8px; border-bottom: 2px solid var(--corner-color); border-right: 2px solid var(--corner-color); border-radius: 0 0 5px 0; }
 
-      .btn:hover {
-        background: var(--bg-btn-hover);
-        border-color: rgba(0, 229, 255, 0.2);
-        transform: translateY(-1px);
-        box-shadow:
-          0 4px 15px rgba(0, 0, 0, 0.4),
-          0 0 10px rgba(0, 229, 255, 0.1);
-      }
-      .btn:active {
-        transform: translateY(1px) scale(0.96);
-        box-shadow: none;
-      }
+/* ═══ Status bar ═══ */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(8px,1.5vh,12px);
+  padding: 0 2px;
+}
+.dots { display: flex; gap: 5px; align-items: center; }
+.dot {
+  width: clamp(5px,1.2vw,7px); height: clamp(5px,1.2vw,7px);
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+.dot-g { background: var(--status-live); box-shadow: 0 0 7px var(--status-live); }
+.dot-b { background: var(--accent-b); box-shadow: 0 0 7px var(--accent-b); animation-delay: 0.6s; }
+.dot-a { background: var(--accent-a); box-shadow: 0 0 7px var(--accent-a); animation-delay: 1.2s; }
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.35;transform:scale(0.65)} }
+.status-text { font-size: clamp(7px,1.4vw,9px); color: var(--text-dim); letter-spacing: 0.25em; transition: color 0.3s; }
+.mode-tag {
+  font-size: clamp(7px,1.4vw,9px);
+  color: var(--accent-a);
+  border: 1px solid var(--op-border);
+  padding: 2px clamp(5px,1.2vw,8px);
+  border-radius: 999px;
+  letter-spacing: 0.2em;
+  transition: all 0.3s;
+}
 
-      /* Ripple */
-      .ripple {
-        position: absolute;
-        border-radius: 50%;
-        transform: scale(0);
-        animation: rippleAnim 0.4s linear;
-        background: rgba(0, 229, 255, 0.2);
-        pointer-events: none;
-      }
-      @keyframes rippleAnim {
-        to {
-          transform: scale(4);
-          opacity: 0;
-        }
-      }
+/* ═══ Display ═══ */
+.display {
+  background: var(--bg-display);
+  border: 1px solid var(--border);
+  border-radius: clamp(8px,2vw,14px);
+  padding: clamp(10px,2vw,16px) clamp(12px,2.5vw,18px);
+  margin-bottom: clamp(8px,1.5vh,14px);
+  position: relative;
+  min-height: clamp(85px,15vh,120px);
+  overflow: hidden;
+  box-shadow: var(--display-glow);
+  transition: all 0.4s;
+}
+.display::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg,transparent,var(--accent-a),transparent);
+  opacity: 0.4;
+}
+.display::after {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg,transparent,transparent 3px,var(--scanline) 3px,var(--scanline) 4px);
+  pointer-events: none; border-radius: inherit;
+  transition: background 0.4s;
+}
+.expression {
+  font-size: clamp(9px,1.8vw,12px);
+  color: var(--text-expr);
+  text-align: right;
+  min-height: clamp(16px,3vh,22px);
+  letter-spacing: 0.08em;
+  word-break: break-all;
+  margin-bottom: clamp(4px,1vh,8px);
+  transition: color 0.4s;
+  font-family: 'Exo 2', sans-serif;
+}
+.result {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(24px,7vw,42px);
+  font-weight: 700;
+  text-align: right;
+  color: var(--text-main);
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 18px rgba(0,229,255,0.2);
+  transition: color 0.3s, font-size 0.2s, text-shadow 0.4s;
+  word-break: break-all;
+  line-height: 1.1;
+}
+.result.err  { color: var(--accent-d) !important; font-size: clamp(16px,4vw,22px); }
+.result.flash { animation: displayFlash 0.18s ease; }
+@keyframes displayFlash {
+  0%{opacity:1} 50%{opacity:0.25; color: var(--accent-a)} 100%{opacity:1}
+}
 
-      /* Operator buttons */
-      .btn.op {
-        color: var(--accent-cyan);
-        border-color: rgba(0, 229, 255, 0.15);
-        background: rgba(0, 229, 255, 0.05);
-        font-family: "Orbitron", sans-serif;
-        font-size: 16px;
-      }
-      .btn.op:hover {
-        background: rgba(0, 229, 255, 0.12);
-        border-color: var(--accent-cyan);
-        box-shadow: var(--glow-cyan);
-        color: var(--accent-cyan);
-      }
+/* ═══ Memory chips ═══ */
+.chips {
+  display: flex; gap: clamp(4px,1vw,7px);
+  margin-bottom: clamp(8px,1.5vh,12px);
+  flex-wrap: wrap;
+}
+.chip {
+  font-size: clamp(7px,1.3vw,9px);
+  color: var(--text-dim);
+  border: 1px solid var(--chip-border);
+  border-radius: 999px;
+  padding: clamp(2px,0.5vh,3px) clamp(6px,1.2vw,10px);
+  letter-spacing: 0.2em;
+  transition: all 0.25s;
+  cursor: default;
+  background: transparent;
+  font-family: 'Share Tech Mono', monospace;
+}
+.chip.on {
+  color: var(--chip-active-color);
+  border-color: var(--chip-active-border);
+  box-shadow: var(--chip-active-shadow);
+}
 
-      /* Equals button */
-      .btn.eq {
-        background: linear-gradient(135deg, #0028a0, var(--accent-blue));
-        border-color: var(--accent-blue);
-        color: #fff;
-        font-family: "Orbitron", sans-serif;
-        font-size: 20px;
-        font-weight: 700;
-        box-shadow: 0 0 15px rgba(41, 121, 255, 0.3);
-      }
-      .btn.eq:hover {
-        background: linear-gradient(135deg, var(--accent-blue), #5b9cff);
-        box-shadow:
-          var(--glow-blue),
-          0 4px 20px rgba(41, 121, 255, 0.4);
-        transform: translateY(-2px);
-      }
+/* ═══ Button grid ═══ */
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(5px,1.2vw,9px);
+}
 
-      /* Clear button */
-      .btn.clr {
-        background: rgba(255, 23, 68, 0.08);
-        border-color: rgba(255, 23, 68, 0.2);
-        color: var(--accent-red);
-      }
-      .btn.clr:hover {
-        background: rgba(255, 23, 68, 0.15);
-        border-color: var(--accent-red);
-        box-shadow: var(--glow-red);
-      }
+/* ═══ Buttons ═══ */
+.btn {
+  position: relative;
+  height: clamp(44px,8.5vh,64px);
+  border: 1px solid var(--border);
+  border-radius: clamp(7px,1.5vw,11px);
+  background: var(--bg-btn);
+  color: var(--text-main);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(11px,2.2vw,15px);
+  cursor: pointer;
+  transition: all 0.14s ease;
+  overflow: hidden;
+  outline: none;
+  display: flex; align-items: center; justify-content: center;
+  letter-spacing: 0.04em;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 60%);
+  pointer-events: none;
+}
+.btn:hover {
+  background: var(--bg-btn-h);
+  border-color: var(--border-h);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35), var(--glow-a);
+}
+.btn:active { transform: scale(0.94) translateY(1px); box-shadow: none !important; }
 
-      /* Function buttons */
-      .btn.fn {
-        color: var(--accent-orange);
-        border-color: rgba(255, 145, 0, 0.15);
-        background: rgba(255, 145, 0, 0.04);
-        font-size: 11px;
-      }
-      .btn.fn:hover {
-        background: rgba(255, 145, 0, 0.1);
-        border-color: var(--accent-orange);
-        box-shadow: 0 0 15px rgba(255, 145, 0, 0.3);
-      }
+/* Ripple */
+.rip {
+  position: absolute; border-radius: 50%;
+  transform: scale(0);
+  animation: rip 0.4s linear;
+  background: rgba(255,255,255,0.12);
+  pointer-events: none;
+}
+@keyframes rip { to { transform: scale(4); opacity: 0; } }
 
-      /* Zero button (wide) */
-      .btn.zero {
-        grid-column: span 2;
-      }
+/* Button variants */
+.btn.op {
+  color: var(--op-color);
+  border-color: var(--op-border);
+  background: var(--op-bg);
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(13px,2.5vw,18px);
+}
+.btn.op:hover { background: var(--op-bg-h); border-color: var(--accent-a); box-shadow: var(--glow-a); }
+.btn.op.active-op { background: var(--op-bg-h); border-color: var(--accent-a); box-shadow: var(--glow-a); }
 
-      /* Memory buttons */
-      .btn.mem {
-        color: var(--accent-green);
-        border-color: rgba(0, 230, 118, 0.15);
-        background: rgba(0, 230, 118, 0.04);
-        font-size: 11px;
-      }
-      .btn.mem:hover {
-        background: rgba(0, 230, 118, 0.1);
-        border-color: var(--accent-green);
-        box-shadow: var(--glow-green);
-      }
+.btn.eq {
+  background: var(--eq-bg);
+  border-color: var(--accent-b);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(16px,3vw,22px);
+  font-weight: 700;
+  box-shadow: var(--eq-shadow);
+  grid-column: span 4;
+}
+.btn.eq:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: var(--eq-shadow), 0 6px 20px rgba(0,0,0,0.4); }
 
-      /* Backspace */
-      .btn.back {
-        color: #ffcc00;
-        font-size: 18px;
-      }
+.btn.clr {
+  color: var(--clr-color);
+  border-color: var(--clr-border);
+  background: var(--clr-bg);
+}
+.btn.clr:hover { background: var(--clr-bg-h); border-color: var(--clr-color); box-shadow: var(--glow-d); }
 
-      /* Number buttons */
-      .btn.num:hover {
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(0, 229, 255, 0.15);
-      }
+.btn.fn {
+  color: var(--fn-color);
+  border-color: var(--fn-border);
+  background: var(--fn-bg);
+  font-size: clamp(9px,1.8vw,12px);
+}
+.btn.fn:hover { background: var(--fn-bg-h); border-color: var(--fn-color); box-shadow: var(--fn-glow); }
 
-      /* Active operator highlight */
-      .btn.op.active-op {
-        background: rgba(0, 229, 255, 0.15);
-        border-color: var(--accent-cyan);
-        box-shadow: var(--glow-cyan);
-      }
+.btn.mem {
+  color: var(--mem-color);
+  border-color: var(--mem-border);
+  background: var(--mem-bg);
+  font-size: clamp(9px,1.8vw,12px);
+}
+.btn.mem:hover { background: var(--mem-bg-h); border-color: var(--mem-color); box-shadow: var(--glow-c); }
 
-      /* Footer */
-      .footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 14px;
-        padding: 0 4px;
-      }
-      .footer-text {
-        font-size: 8px;
-        color: rgba(74, 117, 153, 0.5);
-        letter-spacing: 0.3em;
-      }
+.btn.num:hover { background: var(--num-bg-h); border-color: var(--border-h); }
 
-      /* Responsive */
-      @media (max-width: 400px) {
-        .calc {
-          padding: 14px;
-        }
-        .btn {
-          height: 52px;
-          font-size: 13px;
-        }
-        .btn-grid {
-          gap: 6px;
-        }
-      }
-      @media (max-width: 320px) {
-        .btn {
-          height: 46px;
-          font-size: 12px;
-        }
-        .btn-grid {
-          gap: 5px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Particles -->
-    <div class="particles" id="particles"></div>
+.btn.back { color: var(--back-color); font-size: clamp(14px,2.5vw,20px); }
+.btn.zero { grid-column: span 2; }
 
-    <div class="wrapper">
-      <!-- Header -->
-      <div class="header">
-        <div class="header-title">ABRAR CALC</div>
-        <div class="header-sub">QUANTUM COMPUTING UNIT v2.0</div>
+/* ═══ Footer ═══ */
+.footer {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: clamp(10px,1.5vh,16px);
+  padding: 0 3px;
+}
+.ft { font-size: clamp(7px,1.3vw,9px); color: var(--footer-color); letter-spacing: 0.25em; transition: color 0.4s; }
+
+/* ═══════════════════════════════════════════════
+   17 BREAKPOINTS — from 240px to 2560px
+═══════════════════════════════════════════════ */
+
+/* 240px — tiny smartwatch */
+@media (max-width: 259px) {
+  .wrapper { max-width: 220px; gap: 5px; }
+  .calc { padding: 8px; border-radius: 10px; }
+  .btn { height: 38px; font-size: 10px; border-radius: 6px; }
+  .btn-grid { gap: 4px; }
+  .result { font-size: 20px; }
+  .header-title { font-size: 12px; }
+  .header-sub,.ft { display: none; }
+  .chips { display: none; }
+}
+
+/* 260px */
+@media (min-width: 260px) and (max-width: 299px) {
+  .wrapper { max-width: 250px; }
+  .calc { padding: 9px; border-radius: 11px; }
+  .btn { height: 40px; font-size: 10px; }
+  .btn-grid { gap: 4px; }
+  .result { font-size: 22px; }
+  .header-title { font-size: 13px; }
+  .header-sub { display: none; }
+}
+
+/* 300px */
+@media (min-width: 300px) and (max-width: 339px) {
+  .wrapper { max-width: 290px; }
+  .calc { padding: 10px; border-radius: 12px; }
+  .btn { height: 42px; font-size: 11px; }
+  .btn-grid { gap: 5px; }
+  .result { font-size: 24px; }
+  .header-title { font-size: 14px; }
+}
+
+/* 340px */
+@media (min-width: 340px) and (max-width: 374px) {
+  .wrapper { max-width: 330px; }
+  .btn { height: 44px; }
+  .result { font-size: 26px; }
+}
+
+/* 375px — iPhone SE/standard */
+@media (min-width: 375px) and (max-width: 413px) {
+  .wrapper { max-width: 360px; }
+  .btn { height: 48px; }
+  .result { font-size: 28px; }
+}
+
+/* 414px — iPhone Plus / large phones */
+@media (min-width: 414px) and (max-width: 479px) {
+  .wrapper { max-width: 400px; }
+  .btn { height: 50px; }
+  .result { font-size: 30px; }
+}
+
+/* 480px — small tablets portrait */
+@media (min-width: 480px) and (max-width: 567px) {
+  .wrapper { max-width: 460px; }
+  .btn { height: 52px; font-size: 13px; }
+  .result { font-size: 34px; }
+}
+
+/* 568px — iPhone SE landscape */
+@media (min-width: 568px) and (max-width: 639px) {
+  .wrapper { max-width: 520px; }
+  .btn { height: 50px; }
+}
+
+/* 640px — small tablet landscape / large phone landscape */
+@media (min-width: 640px) and (max-width: 767px) {
+  .wrapper { max-width: 560px; }
+  .calc { padding: 18px; }
+  .btn { height: 52px; font-size: 14px; }
+  .result { font-size: 36px; }
+}
+
+/* 768px — tablet portrait (iPad) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wrapper { max-width: 480px; }
+  .calc { padding: 20px; }
+  .btn { height: 58px; font-size: 15px; border-radius: 11px; }
+  .btn-grid { gap: 8px; }
+  .result { font-size: 40px; }
+  .display { min-height: 110px; }
+}
+
+/* 1024px — iPad landscape / small laptop */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .wrapper { max-width: 430px; }
+  .btn { height: 56px; }
+  .result { font-size: 38px; }
+}
+
+/* 1200px — laptop */
+@media (min-width: 1200px) and (max-width: 1365px) {
+  .wrapper { max-width: 420px; }
+  .calc { padding: 22px; }
+  .btn { height: 58px; }
+  .result { font-size: 40px; }
+}
+
+/* 1366px — HD laptop (common 13/14") */
+@media (min-width: 1366px) and (max-width: 1439px) {
+  .wrapper { max-width: 430px; }
+  .btn { height: 60px; font-size: 15px; }
+  .result { font-size: 42px; }
+}
+
+/* 1440px — MacBook Pro 14" / most laptops */
+@media (min-width: 1440px) and (max-width: 1679px) {
+  .wrapper { max-width: 440px; }
+  .btn { height: 62px; font-size: 15px; }
+  .result { font-size: 44px; }
+}
+
+/* 1680px — larger laptop/monitor */
+@media (min-width: 1680px) and (max-width: 1919px) {
+  .wrapper { max-width: 460px; }
+  .calc { padding: 24px; }
+  .btn { height: 64px; font-size: 16px; border-radius: 12px; }
+  .btn-grid { gap: 10px; }
+  .result { font-size: 46px; }
+}
+
+/* 1920px — Full HD monitor */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .wrapper { max-width: 500px; }
+  .calc { padding: 26px; border-radius: 24px; }
+  .btn { height: 68px; font-size: 17px; border-radius: 13px; }
+  .btn-grid { gap: 11px; }
+  .result { font-size: 50px; }
+  .header-title { font-size: 30px; }
+  .display { min-height: 130px; }
+}
+
+/* 2560px — 2K / QHD / 27" monitor */
+@media (min-width: 2560px) {
+  html { font-size: 20px; }
+  .wrapper { max-width: 600px; }
+  .calc { padding: 32px; border-radius: 28px; }
+  .btn { height: 80px; font-size: 19px; border-radius: 15px; }
+  .btn-grid { gap: 13px; }
+  .result { font-size: 60px; }
+  .header-title { font-size: 36px; }
+  .display { min-height: 150px; padding: 20px 22px; }
+  .theme-panel { top: 28px; right: 28px; }
+  .toggle-btn { width: 72px; height: 38px; }
+}
+
+/* Landscape on small screens — compress vertically */
+@media (max-height: 500px) and (orientation: landscape) {
+  body { padding: 6px; justify-content: flex-start; }
+  .wrapper { gap: 5px; }
+  .header { display: none; }
+  .display { min-height: 70px; }
+  .btn { height: 40px; }
+  .btn-grid { gap: 4px; }
+  .chips { display: none; }
+  .footer { margin-top: 6px; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.1ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-orbs"></div>
+<canvas id="particles"></canvas>
+
+<!-- Theme Panel -->
+<div class="theme-panel">
+  <button class="toggle-btn" id="toggleBtn" title="Toggle Theme" aria-label="Theme Toggle">
+    <div class="toggle-knob" id="toggleKnob">☽</div>
+  </button>
+  <div class="theme-picker" id="themePicker">
+    <div class="theme-picker-label">SELECT THEME</div>
+    <button class="theme-opt" data-t="dark">
+      <span class="theme-dot" style="background:#00e5ff;color:#00e5ff"></span>DARK CYBER
+    </button>
+    <button class="theme-opt" data-t="light">
+      <span class="theme-dot" style="background:#f5a623;color:#f5a623"></span>SOLAR LIGHT
+    </button>
+    <button class="theme-opt" data-t="neon">
+      <span class="theme-dot" style="background:#ff00ff;color:#ff00ff"></span>NEON ACID
+    </button>
+    <button class="theme-opt" data-t="amber">
+      <span class="theme-dot" style="background:#ffaa00;color:#ffaa00"></span>AMBER CRT
+    </button>
+    <button class="theme-opt" data-t="matrix">
+      <span class="theme-dot" style="background:#00ff41;color:#00ff41"></span>MATRIX
+    </button>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="wrapper">
+  <div class="header">
+    <div class="header-title">NEXUS CALC</div>
+    <div class="header-sub">QUANTUM COMPUTING UNIT — PRO v3.0</div>
+  </div>
+
+  <div class="calc" id="calc">
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <!-- Status -->
+    <div class="status-bar">
+      <div class="dots">
+        <div class="dot dot-g"></div>
+        <div class="dot dot-b"></div>
+        <div class="dot dot-a"></div>
       </div>
-
-      <!-- Calculator -->
-      <div class="calc" id="calc">
-        <!-- Status Bar -->
-        <div class="status-bar">
-          <div style="display: flex; gap: 6px; align-items: center">
-            <div class="status-dot green"></div>
-            <div class="status-dot blue"></div>
-            <div class="status-dot cyan"></div>
-          </div>
-          <div class="status-text" id="statusText">SYSTEM READY</div>
-          <div class="mode-tag" id="modeTag">STD</div>
-        </div>
-
-        <!-- Display -->
-        <div class="display">
-          <div class="expression" id="expression">&nbsp;</div>
-          <div class="result" id="result">0</div>
-        </div>
-
-        <!-- Memory bar -->
-        <div class="memory-bar">
-          <div class="mem-chip" id="chipM">M: 0</div>
-          <div class="mem-chip" id="chipAns">ANS: 0</div>
-          <div class="mem-chip" id="chipDeg">DEG</div>
-        </div>
-
-        <!-- Button Grid -->
-        <div class="btn-grid" id="btnGrid">
-          <!-- Row 1: Memory + Clear -->
-          <button class="btn mem fn" id="btnMC" data-action="MC">MC</button>
-          <button class="btn mem fn" id="btnMR" data-action="MR">MR</button>
-          <button class="btn mem fn" id="btnMPlus" data-action="M+">M+</button>
-          <button class="btn clr" id="btnAC" data-action="AC">AC</button>
-
-          <!-- Row 2: Scientific functions -->
-          <button class="btn fn" data-action="sin">SIN</button>
-          <button class="btn fn" data-action="cos">COS</button>
-          <button class="btn fn" data-action="tan">TAN</button>
-          <button class="btn fn" data-action="sqrt">√</button>
-
-          <!-- Row 3: More functions -->
-          <button class="btn fn" data-action="log">LOG</button>
-          <button class="btn fn" data-action="ln">LN</button>
-          <button class="btn fn" data-action="pow2">x²</button>
-          <button class="btn fn" data-action="pi">π</button>
-
-          <!-- Row 4 -->
-          <button class="btn fn" data-action="(">(</button>
-          <button class="btn fn" data-action=")">)</button>
-          <button class="btn fn" data-action="percent">%</button>
-          <button class="btn back" data-action="backspace">⌫</button>
-
-          <!-- Row 5 -->
-          <button class="btn num" data-action="7">7</button>
-          <button class="btn num" data-action="8">8</button>
-          <button class="btn num" data-action="9">9</button>
-          <button class="btn op" data-action="÷">÷</button>
-
-          <!-- Row 6 -->
-          <button class="btn num" data-action="4">4</button>
-          <button class="btn num" data-action="5">5</button>
-          <button class="btn num" data-action="6">6</button>
-          <button class="btn op" data-action="×">×</button>
-
-          <!-- Row 7 -->
-          <button class="btn num" data-action="1">1</button>
-          <button class="btn num" data-action="2">2</button>
-          <button class="btn num" data-action="3">3</button>
-          <button class="btn op" data-action="−">−</button>
-
-          <!-- Row 8 -->
-          <button class="btn num zero" data-action="0">0</button>
-          <button class="btn num" data-action=".">.</button>
-          <button class="btn op" data-action="+">+</button>
-
-          <!-- Row 9: Equals (full width) -->
-          <button class="btn eq" style="grid-column: span 4" data-action="=">
-            =
-          </button>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-          <div class="footer-text">NEXUS © 2025</div>
-          <div class="footer-text" id="footerTime">--:--:--</div>
-          <div class="footer-text">SECURE MODE</div>
-        </div>
-      </div>
+      <div class="status-text" id="statusEl">SYSTEM READY</div>
+      <div class="mode-tag" id="modeEl">STD</div>
     </div>
 
-    <script>
-      // ─── Particles ───────────────────────────────────────────────
-      (function () {
-        const container = document.getElementById("particles");
-        for (let i = 0; i < 25; i++) {
-          const p = document.createElement("div");
-          p.className = "particle";
-          p.style.left = Math.random() * 100 + "%";
-          p.style.animationDuration = 8 + Math.random() * 15 + "s";
-          p.style.animationDelay = Math.random() * 10 + "s";
-          p.style.width = p.style.height = 1 + Math.random() * 2 + "px";
-          const colors = ["#00e5ff", "#2979ff", "#00e676"];
-          p.style.background = colors[Math.floor(Math.random() * 3)];
-          container.appendChild(p);
-        }
-      })();
+    <!-- Display -->
+    <div class="display">
+      <div class="expression" id="exprEl">&nbsp;</div>
+      <div class="result" id="resultEl">0</div>
+    </div>
 
-      // ─── Clock ────────────────────────────────────────────────────
-      (function clock() {
-        const el = document.getElementById("footerTime");
-        setInterval(() => {
-          const n = new Date();
-          el.textContent = [n.getHours(), n.getMinutes(), n.getSeconds()]
-            .map((v) => String(v).padStart(2, "0"))
-            .join(":");
-        }, 1000);
-      })();
+    <!-- Chips -->
+    <div class="chips">
+      <div class="chip" id="chipM">M: 0</div>
+      <div class="chip" id="chipAns">ANS: 0</div>
+      <div class="chip" id="chipAngle">DEG</div>
+    </div>
 
-      // ─── Ripple effect ────────────────────────────────────────────
-      document.querySelectorAll(".btn").forEach((btn) => {
-        btn.addEventListener("pointerdown", (e) => {
-          const r = document.createElement("span");
-          r.className = "ripple";
-          const rect = btn.getBoundingClientRect();
-          const size = Math.max(rect.width, rect.height);
-          r.style.width = r.style.height = size + "px";
-          r.style.left = e.clientX - rect.left - size / 2 + "px";
-          r.style.top = e.clientY - rect.top - size / 2 + "px";
-          btn.appendChild(r);
-          setTimeout(() => r.remove(), 600);
-        });
-      });
+    <!-- Buttons -->
+    <div class="btn-grid" id="grid">
 
-      // ─── Calculator Logic ─────────────────────────────────────────
-      const display = document.getElementById("result");
-      const exprEl = document.getElementById("expression");
-      const statusEl = document.getElementById("statusText");
-      const modeEl = document.getElementById("modeTag");
-      const chipM = document.getElementById("chipM");
-      const chipAns = document.getElementById("chipAns");
-      const chipDeg = document.getElementById("chipDeg");
+      <!-- Row 1 -->
+      <button class="btn mem" data-a="MC">MC</button>
+      <button class="btn mem" data-a="MR">MR</button>
+      <button class="btn mem" data-a="M+">M+</button>
+      <button class="btn clr" data-a="AC">AC</button>
 
-      let current = "0";
-      let expression = "";
-      let memory = 0;
-      let lastAns = 0;
-      let newNum = true;
-      let hasDot = false;
-      let useDeg = true;
-      let activeOp = null;
-      let firstVal = null;
+      <!-- Row 2 -->
+      <button class="btn fn" data-a="sin">SIN</button>
+      <button class="btn fn" data-a="cos">COS</button>
+      <button class="btn fn" data-a="tan">TAN</button>
+      <button class="btn fn" data-a="sqrt">√</button>
 
-      function toRad(x) {
-        return useDeg ? (x * Math.PI) / 180 : x;
-      }
+      <!-- Row 3 -->
+      <button class="btn fn" data-a="log">LOG</button>
+      <button class="btn fn" data-a="ln">LN</button>
+      <button class="btn fn" data-a="pow2">x²</button>
+      <button class="btn fn" data-a="pi">π</button>
 
-      function setDisplay(val, isErr) {
-        display.textContent = val;
-        display.classList.toggle("error", !!isErr);
-        display.classList.add("flash");
-        setTimeout(() => display.classList.remove("flash"), 200);
-      }
+      <!-- Row 4 -->
+      <button class="btn fn"  data-a="(">(</button>
+      <button class="btn fn"  data-a=")">)</button>
+      <button class="btn fn"  data-a="%">%</button>
+      <button class="btn back" data-a="back">⌫</button>
 
-      function setStatus(msg) {
-        statusEl.textContent = msg;
-        setTimeout(() => {
-          statusEl.textContent = "SYSTEM READY";
-        }, 2000);
-      }
+      <!-- Row 5 -->
+      <button class="btn num" data-a="7">7</button>
+      <button class="btn num" data-a="8">8</button>
+      <button class="btn num" data-a="9">9</button>
+      <button class="btn op"  data-a="÷">÷</button>
 
-      function updateChips() {
-        chipM.textContent = "M: " + formatNum(memory);
-        chipM.classList.toggle("active", memory !== 0);
-        chipAns.textContent = "ANS: " + formatNum(lastAns);
-        chipDeg.textContent = useDeg ? "DEG" : "RAD";
-        chipDeg.classList.add("active");
-      }
+      <!-- Row 6 -->
+      <button class="btn num" data-a="4">4</button>
+      <button class="btn num" data-a="5">5</button>
+      <button class="btn num" data-a="6">6</button>
+      <button class="btn op"  data-a="×">×</button>
 
-      function formatNum(n) {
-        if (!isFinite(n)) return "ERROR";
-        if (Math.abs(n) >= 1e12 || (Math.abs(n) < 1e-7 && n !== 0))
-          return n.toExponential(4);
-        let s = parseFloat(n.toPrecision(12)).toString();
-        return s;
-      }
+      <!-- Row 7 -->
+      <button class="btn num" data-a="1">1</button>
+      <button class="btn num" data-a="2">2</button>
+      <button class="btn num" data-a="3">3</button>
+      <button class="btn op"  data-a="−">−</button>
 
-      function highlightOp(op) {
-        document
-          .querySelectorAll(".btn.op")
-          .forEach((b) => b.classList.remove("active-op"));
-        if (op) {
-          document.querySelectorAll(".btn.op").forEach((b) => {
-            if (b.dataset.action === op) b.classList.add("active-op");
-          });
-        }
-      }
+      <!-- Row 8 -->
+      <button class="btn num zero" data-a="0">0</button>
+      <button class="btn num"      data-a=".">.</button>
+      <button class="btn op"       data-a="+">+</button>
 
-      function compute() {
-        if (firstVal === null || activeOp === null) return parseFloat(current);
-        const a = firstVal,
-          b = parseFloat(current);
-        switch (activeOp) {
-          case "+":
-            return a + b;
-          case "−":
-            return a - b;
-          case "×":
-            return a * b;
-          case "÷":
-            return b === 0 ? NaN : a / b;
-          default:
-            return b;
-        }
-      }
+      <!-- Row 9 -->
+      <button class="btn eq" data-a="=">=</button>
 
-      function handleAction(action) {
-        // Numbers
-        if (/^[0-9]$/.test(action)) {
-          if (newNum) {
-            current = action;
-            newNum = false;
-            hasDot = false;
-          } else {
-            if (current.length < 15) current += action;
-          }
-          setDisplay(current);
-          modeEl.textContent = "INPUT";
-          return;
-        }
+    </div>
 
-        // Decimal
-        if (action === ".") {
-          if (newNum) {
-            current = "0.";
-            newNum = false;
-            hasDot = true;
-          } else if (!hasDot) {
-            current += ".";
-            hasDot = true;
-          }
-          setDisplay(current);
-          return;
-        }
+    <!-- Footer -->
+    <div class="footer">
+      <div class="ft">NEXUS © 2025</div>
+      <div class="ft" id="clockEl">--:--:--</div>
+      <div class="ft">SECURE</div>
+    </div>
+  </div>
+</div>
 
-        // Operators
-        if (["+", "−", "×", "÷"].includes(action)) {
-          const val = compute();
-          if (!isNaN(val)) firstVal = val;
-          else firstVal = parseFloat(current);
-          activeOp = action;
-          newNum = true;
-          hasDot = false;
-          expression = formatNum(firstVal) + " " + action;
-          exprEl.textContent = expression;
-          highlightOp(action);
-          modeEl.textContent = "OPER";
-          return;
-        }
+<script>
+/* ═══════════════════════════════════════════
+   PARTICLE SYSTEM
+═══════════════════════════════════════════ */
+(function(){
+  const cvs = document.getElementById('particles');
+  const ctx = cvs.getContext('2d');
+  let W, H, pts = [];
 
-        // Equals
-        if (action === "=") {
-          const result = compute();
-          expression = exprEl.textContent + " " + current + " =";
-          exprEl.textContent = expression;
-          if (!isFinite(result) || isNaN(result)) {
-            setDisplay("ERR", true);
-            setStatus("DIVISION ERROR");
-          } else {
-            lastAns = result;
-            current = formatNum(result);
-            setDisplay(current);
-            setStatus("COMPUTED");
-            modeEl.textContent = "RES";
-          }
-          firstVal = null;
-          activeOp = null;
-          newNum = true;
-          hasDot = current.includes(".");
-          highlightOp(null);
-          updateChips();
-          return;
-        }
+  function resize(){
+    W = cvs.width  = window.innerWidth;
+    H = cvs.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-        // AC / CE
-        if (action === "AC") {
-          current = "0";
-          expression = "";
-          firstVal = null;
-          activeOp = null;
-          newNum = true;
-          hasDot = false;
-          exprEl.innerHTML = "&nbsp;";
-          setDisplay("0");
-          highlightOp(null);
-          setStatus("CLEARED");
-          modeEl.textContent = "STD";
-          return;
-        }
+  function getColor(){
+    const t = document.documentElement.getAttribute('data-theme');
+    const map = {
+      dark:   ['#00e5ff','#2979ff','#00e676'],
+      light:  ['#0077cc','#1155ee','#008844'],
+      neon:   ['#ff00ff','#00ffff','#00ff88'],
+      amber:  ['#ffaa00','#ff8800','#ffcc44'],
+      matrix: ['#00ff41','#00dd33','#88ff88']
+    };
+    const arr = map[t] || map.dark;
+    return arr[Math.floor(Math.random()*arr.length)];
+  }
 
-        // Backspace
-        if (action === "backspace") {
-          if (!newNum && current.length > 1) {
-            if (current.slice(-1) === ".") hasDot = false;
-            current = current.slice(0, -1);
-          } else {
-            current = "0";
-            newNum = true;
-            hasDot = false;
-          }
-          setDisplay(current);
-          return;
-        }
+  for(let i=0; i<40; i++) pts.push({
+    x: Math.random()*2000, y: Math.random()*1200,
+    vx: (Math.random()-.5)*0.4, vy: -0.3-Math.random()*0.5,
+    r: 0.5+Math.random()*1.5,
+    a: 0, life: Math.random(),
+    color: getColor()
+  });
 
-        // Percent
-        if (action === "percent") {
-          const v = parseFloat(current) / 100;
-          current = formatNum(v);
-          hasDot = current.includes(".");
-          setDisplay(current);
-          return;
-        }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x += p.vx; p.y += p.vy; p.life += 0.004;
+      if(p.life>1){ p.life=0; p.x=Math.random()*W; p.y=H+10; p.color=getColor(); }
+      const op = p.life<0.1 ? p.life*10 : p.life>0.9 ? (1-p.life)*10 : 1;
+      ctx.beginPath();
+      ctx.arc(p.x%W, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = op * 0.6;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
-        // Parentheses (append to expression display only)
-        if (action === "(" || action === ")") {
-          expression += action;
-          exprEl.textContent = expression;
-          return;
-        }
+/* ═══════════════════════════════════════════
+   THEME SYSTEM
+═══════════════════════════════════════════ */
+const themes = ['dark','light','neon','amber','matrix'];
+const knobIcons = { dark:'☽', light:'☀', neon:'⚡', amber:'◈', matrix:'⬡' };
+let pickerOpen = false;
 
-        // Scientific functions
-        const val = parseFloat(current);
-        let res;
-        switch (action) {
-          case "sin":
-            res = Math.sin(toRad(val));
-            setStatus("SIN APPLIED");
-            break;
-          case "cos":
-            res = Math.cos(toRad(val));
-            setStatus("COS APPLIED");
-            break;
-          case "tan":
-            res = Math.tan(toRad(val));
-            setStatus("TAN APPLIED");
-            break;
-          case "sqrt":
-            res = Math.sqrt(val);
-            setStatus("√ APPLIED");
-            break;
-          case "log":
-            res = Math.log10(val);
-            setStatus("LOG₁₀ APPLIED");
-            break;
-          case "ln":
-            res = Math.log(val);
-            setStatus("LN APPLIED");
-            break;
-          case "pow2":
-            res = val * val;
-            setStatus("x² APPLIED");
-            break;
-          case "pi":
-            res = Math.PI;
-            newNum = false;
-            setStatus("π INSERTED");
-            break;
-          default:
-            return;
-        }
-        if (!isFinite(res) || isNaN(res)) {
-          setDisplay("ERR", true);
-          setStatus("MATH ERROR");
-          return;
-        }
-        lastAns = res;
-        current = formatNum(res);
-        hasDot = current.includes(".");
-        newNum = true;
-        expression = action.toUpperCase() + "(" + formatNum(val) + ") =";
-        exprEl.textContent = expression;
-        setDisplay(current);
-        modeEl.textContent = "FUNC";
-        updateChips();
-      }
+const html       = document.documentElement;
+const toggleBtn  = document.getElementById('toggleBtn');
+const toggleKnob = document.getElementById('toggleKnob');
+const themePicker= document.getElementById('themePicker');
 
-      // Memory
-      function handleMem(action) {
-        if (action === "MC") {
-          memory = 0;
-          setStatus("MEM CLEARED");
-        }
-        if (action === "MR") {
-          current = formatNum(memory);
-          hasDot = current.includes(".");
-          newNum = true;
-          setDisplay(current);
-          setStatus("MEM RECALLED");
-        }
-        if (action === "M+") {
-          memory += parseFloat(current);
-          setStatus("MEM STORED");
-        }
-        updateChips();
-      }
+function applyTheme(t){
+  html.setAttribute('data-theme', t);
+  toggleKnob.textContent = knobIcons[t] || '●';
+  localStorage.setItem('nx-theme', t);
+  document.querySelectorAll('.theme-opt').forEach(o=>{
+    o.classList.toggle('active', o.dataset.t === t);
+  });
+}
 
-      // Keyboard support
-      document.addEventListener("keydown", (e) => {
-        const k = e.key;
-        if (/^[0-9]$/.test(k)) handleAction(k);
-        else if (k === ".") handleAction(".");
-        else if (k === "+") handleAction("+");
-        else if (k === "-") handleAction("−");
-        else if (k === "*") handleAction("×");
-        else if (k === "/") {
-          e.preventDefault();
-          handleAction("÷");
-        } else if (k === "Enter" || k === "=") handleAction("=");
-        else if (k === "Backspace") handleAction("backspace");
-        else if (k === "Escape") handleAction("AC");
-        else if (k === "%") handleAction("percent");
-      });
+// Load saved theme
+applyTheme(localStorage.getItem('nx-theme') || 'dark');
 
-      // Button click delegation
-      document.getElementById("btnGrid").addEventListener("click", (e) => {
-        const btn = e.target.closest(".btn");
-        if (!btn) return;
-        const action = btn.dataset.action;
-        if (["MC", "MR", "M+"].includes(action)) handleMem(action);
-        else handleAction(action);
-      });
+toggleBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  pickerOpen = !pickerOpen;
+  themePicker.classList.toggle('open', pickerOpen);
+});
 
-      // DEG/RAD toggle on chipDeg
-      chipDeg.addEventListener("click", () => {
-        useDeg = !useDeg;
-        chipDeg.textContent = useDeg ? "DEG" : "RAD";
-        setStatus(useDeg ? "MODE: DEGREE" : "MODE: RADIAN");
-      });
+document.querySelectorAll('.theme-opt').forEach(opt=>{
+  opt.addEventListener('click', ()=>{
+    applyTheme(opt.dataset.t);
+    pickerOpen = false;
+    themePicker.classList.remove('open');
+  });
+});
 
-      updateChips();
-    </script>
-  </body>
+document.addEventListener('click', ()=>{
+  if(pickerOpen){ pickerOpen=false; themePicker.classList.remove('open'); }
+});
+
+/* ═══════════════════════════════════════════
+   CLOCK
+═══════════════════════════════════════════ */
+(function(){
+  const el = document.getElementById('clockEl');
+  function tick(){
+    const n = new Date();
+    el.textContent = [n.getHours(),n.getMinutes(),n.getSeconds()]
+      .map(v=>String(v).padStart(2,'0')).join(':');
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+/* ═══════════════════════════════════════════
+   RIPPLE
+═══════════════════════════════════════════ */
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('pointerdown', e=>{
+    const r = document.createElement('span');
+    r.className = 'rip';
+    const rc = btn.getBoundingClientRect();
+    const sz = Math.max(rc.width, rc.height);
+    r.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX-rc.left-sz/2}px;top:${e.clientY-rc.top-sz/2}px`;
+    btn.appendChild(r);
+    setTimeout(()=>r.remove(), 500);
+  });
+});
+
+/* ═══════════════════════════════════════════
+   CALCULATOR ENGINE
+═══════════════════════════════════════════ */
+const resultEl = document.getElementById('resultEl');
+const exprEl   = document.getElementById('exprEl');
+const statusEl = document.getElementById('statusEl');
+const modeEl   = document.getElementById('modeEl');
+const chipM    = document.getElementById('chipM');
+const chipAns  = document.getElementById('chipAns');
+const chipAngle= document.getElementById('chipAngle');
+
+let cur = '0', expr = '', mem = 0, ans = 0;
+let newNum = true, hasDot = false, useDeg = true;
+let op = null, fv = null;
+
+function toRad(x){ return useDeg ? x*Math.PI/180 : x; }
+
+function fmt(n){
+  if(!isFinite(n)||isNaN(n)) return 'ERROR';
+  if(Math.abs(n)>=1e13||(Math.abs(n)<1e-9&&n!==0)) return n.toExponential(5);
+  return parseFloat(n.toPrecision(12)).toString();
+}
+
+function setRes(v, err){
+  resultEl.textContent = v;
+  resultEl.classList.toggle('err', !!err);
+  resultEl.classList.add('flash');
+  setTimeout(()=>resultEl.classList.remove('flash'), 200);
+}
+
+function setStat(msg, mode){
+  statusEl.textContent = msg;
+  if(mode) modeEl.textContent = mode;
+  setTimeout(()=>statusEl.textContent='SYSTEM READY', 1800);
+}
+
+function updateChips(){
+  chipM.textContent   = 'M: '+fmt(mem);
+  chipM.classList.toggle('on', mem!==0);
+  chipAns.textContent = 'ANS: '+fmt(ans);
+  chipAngle.textContent = useDeg ? 'DEG' : 'RAD';
+  chipAngle.classList.add('on');
+}
+
+function doCalc(){
+  if(fv===null||op===null) return parseFloat(cur);
+  const a=fv, b=parseFloat(cur);
+  if(op==='+') return a+b;
+  if(op==='−') return a-b;
+  if(op==='×') return a*b;
+  if(op==='÷') return b===0 ? NaN : a/b;
+  return b;
+}
+
+function clearOp(){
+  document.querySelectorAll('.btn.op').forEach(b=>b.classList.remove('active-op'));
+}
+function hiliteOp(o){
+  clearOp();
+  if(o) document.querySelectorAll('.btn.op').forEach(b=>{ if(b.dataset.a===o) b.classList.add('active-op'); });
+}
+
+function handle(a){
+  // Digit
+  if(/^[0-9]$/.test(a)){
+    if(newNum){ cur=a; newNum=false; hasDot=false; }
+    else if(cur.length<16) cur+=a;
+    setRes(cur); modeEl.textContent='INPUT'; return;
+  }
+  // Dot
+  if(a==='.'){
+    if(newNum){ cur='0.'; newNum=false; hasDot=true; }
+    else if(!hasDot){ cur+='.'; hasDot=true; }
+    setRes(cur); return;
+  }
+  // Operators
+  if(['+','−','×','÷'].includes(a)){
+    fv = isNaN(doCalc()) ? parseFloat(cur) : doCalc();
+    op = a; newNum=true; hasDot=false;
+    expr = fmt(fv)+' '+a;
+    exprEl.textContent = expr;
+    hiliteOp(a); setStat('OPERATOR SET','OPER'); return;
+  }
+  // Equals
+  if(a==='='){
+    const r = doCalc();
+    exprEl.textContent = (expr||cur)+' '+(newNum?'':cur)+' =';
+    if(!isFinite(r)||isNaN(r)){ setRes('ERR',true); setStat('MATH ERROR','ERR'); }
+    else{
+      ans=r; cur=fmt(r);
+      setRes(cur); setStat('COMPUTED','RES');
+      modeEl.textContent='RES';
+    }
+    fv=null; op=null; newNum=true; hasDot=cur.includes('.'); hiliteOp(null);
+    updateChips(); return;
+  }
+  // AC
+  if(a==='AC'){
+    cur='0'; expr=''; fv=null; op=null; newNum=true; hasDot=false;
+    exprEl.innerHTML='&nbsp;'; setRes('0');
+    hiliteOp(null); setStat('CLEARED','STD'); return;
+  }
+  // Backspace
+  if(a==='back'){
+    if(!newNum&&cur.length>1){
+      if(cur.slice(-1)==='.') hasDot=false;
+      cur=cur.slice(0,-1);
+    } else { cur='0'; newNum=true; hasDot=false; }
+    setRes(cur); return;
+  }
+  // Percent
+  if(a==='%'){
+    cur = fmt(parseFloat(cur)/100);
+    hasDot=cur.includes('.'); setRes(cur); return;
+  }
+  // Parentheses
+  if(a==='('||a===')'){
+    expr+=a; exprEl.textContent=expr; return;
+  }
+  // Scientific
+  const v=parseFloat(cur); let res;
+  switch(a){
+    case 'sin':  res=Math.sin(toRad(v));  setStat('SIN APPLIED','FUNC'); break;
+    case 'cos':  res=Math.cos(toRad(v));  setStat('COS APPLIED','FUNC'); break;
+    case 'tan':  res=Math.tan(toRad(v));  setStat('TAN APPLIED','FUNC'); break;
+    case 'sqrt': res=Math.sqrt(v);         setStat('√ APPLIED','FUNC');  break;
+    case 'log':  res=Math.log10(v);        setStat('LOG₁₀','FUNC'); break;
+    case 'ln':   res=Math.log(v);          setStat('LN APPLIED','FUNC'); break;
+    case 'pow2': res=v*v;                  setStat('x² APPLIED','FUNC'); break;
+    case 'pi':   res=Math.PI; newNum=false; setStat('π INSERTED','FUNC'); break;
+    default: return;
+  }
+  if(!isFinite(res)||isNaN(res)){ setRes('ERR',true); setStat('MATH ERROR','ERR'); return; }
+  ans=res; cur=fmt(res); hasDot=cur.includes('.'); newNum=true;
+  exprEl.textContent = a.toUpperCase()+'('+fmt(v)+') =';
+  setRes(cur); updateChips();
+}
+
+function handleMem(a){
+  if(a==='MC'){ mem=0; setStat('MEM CLEARED'); }
+  if(a==='MR'){ cur=fmt(mem); hasDot=cur.includes('.'); newNum=true; setRes(cur); setStat('MEM RECALLED'); }
+  if(a==='M+'){ mem+=parseFloat(cur); setStat('MEM STORED'); }
+  updateChips();
+}
+
+// Angle toggle
+chipAngle.style.cursor='pointer';
+chipAngle.addEventListener('click',()=>{
+  useDeg=!useDeg;
+  setStat(useDeg?'MODE: DEGREE':'MODE: RADIAN');
+  updateChips();
+});
+
+// Button delegation
+document.getElementById('grid').addEventListener('click', e=>{
+  const btn = e.target.closest('.btn');
+  if(!btn) return;
+  const a = btn.dataset.a;
+  if(['MC','MR','M+'].includes(a)) handleMem(a);
+  else handle(a);
+});
+
+// Keyboard
+document.addEventListener('keydown', e=>{
+  const k=e.key;
+  if(/^[0-9]$/.test(k)) handle(k);
+  else if(k==='.') handle('.');
+  else if(k==='+') handle('+');
+  else if(k==='-') handle('−');
+  else if(k==='*') handle('×');
+  else if(k==='/'){ e.preventDefault(); handle('÷'); }
+  else if(k==='Enter'||k==='=') handle('=');
+  else if(k==='Backspace') handle('back');
+  else if(k==='Escape') handle('AC');
+  else if(k==='%') handle('%');
+});
+
+updateChips();
+</script>
+</body>
 </html>
