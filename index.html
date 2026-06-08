@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ABRAR CALC</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-deep: #020408;
+        --bg-panel: #080d14;
+        --bg-card: #0d1520;
+        --bg-btn: #0f1c2e;
+        --bg-btn-hover: #162540;
+        --accent-cyan: #00e5ff;
+        --accent-blue: #2979ff;
+        --accent-green: #00e676;
+        --accent-red: #ff1744;
+        --accent-orange: #ff9100;
+        --text-primary: #e8f4fd;
+        --text-dim: #4a7599;
+        --border: rgba(0, 229, 255, 0.12);
+        --glow-cyan:
+          0 0 20px rgba(0, 229, 255, 0.4), 0 0 60px rgba(0, 229, 255, 0.1);
+        --glow-blue: 0 0 20px rgba(41, 121, 255, 0.5);
+        --glow-green: 0 0 20px rgba(0, 230, 118, 0.4);
+        --glow-red: 0 0 20px rgba(255, 23, 68, 0.4);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* body {
+        min-height: 100vh;
+        background: var(--bg-deep);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Share Tech Mono", monospace;
+        overflow: hidden;
+        position: relative;
+      } */
+
+      body {
+        min-height: 100vh;
+        background: var(--bg-deep);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Share Tech Mono", monospace;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        padding: 20px 0;
+      }
+
+      /* Animated grid background */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        animation: gridMove 20s linear infinite;
+        pointer-events: none;
+      }
+
+      /* Glowing orbs */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 600px 400px at 20% 50%,
+            rgba(0, 229, 255, 0.04) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 400px 600px at 80% 20%,
+            rgba(41, 121, 255, 0.05) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 300px 300px at 60% 80%,
+            rgba(0, 230, 118, 0.03) 0%,
+            transparent 70%
+          );
+        pointer-events: none;
+      }
+
+      @keyframes gridMove {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(40px);
+        }
+      }
+
+      /* Floating particles */
+      .particles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: var(--accent-cyan);
+        border-radius: 50%;
+        animation: float linear infinite;
+        opacity: 0;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        90% {
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(-10vh) translateX(30px);
+          opacity: 0;
+        }
+      }
+
+      /* Main wrapper */
+      .wrapper {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        letter-spacing: 0.4em;
+      }
+      .header-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(18px, 4vw, 26px);
+        font-weight: 900;
+        background: linear-gradient(
+          90deg,
+          var(--accent-cyan),
+          var(--accent-blue),
+          var(--accent-cyan)
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s linear infinite;
+        text-shadow: none;
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: 0% center;
+        }
+        100% {
+          background-position: 200% center;
+        }
+      }
+      .header-sub {
+        font-size: 9px;
+        color: var(--text-dim);
+        letter-spacing: 0.6em;
+        margin-top: 4px;
+      }
+
+      /* Calculator container */
+      .calc {
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 20px;
+        width: min(360px, 95vw);
+        box-shadow:
+          0 0 0 1px rgba(0, 229, 255, 0.05),
+          0 0 40px rgba(0, 0, 0, 0.8),
+          0 0 80px rgba(0, 229, 255, 0.05),
+          inset 0 1px 0 rgba(0, 229, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      /* Corner accents */
+      .calc::before,
+      .calc::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-color: var(--accent-cyan);
+        border-style: solid;
+        opacity: 0.5;
+      }
+      .calc::before {
+        top: 8px;
+        left: 8px;
+        border-width: 2px 0 0 2px;
+        border-radius: 4px 0 0 0;
+      }
+      .calc::after {
+        bottom: 8px;
+        right: 8px;
+        border-width: 0 2px 2px 0;
+        border-radius: 0 0 4px 4px;
+      }
+
+      /* Status bar */
+      .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        padding: 0 4px;
+      }
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      .status-dot.green {
+        background: var(--accent-green);
+        box-shadow: 0 0 8px var(--accent-green);
+      }
+      .status-dot.blue {
+        background: var(--accent-blue);
+        box-shadow: 0 0 8px var(--accent-blue);
+        animation-delay: 0.5s;
+      }
+      .status-dot.cyan {
+        background: var(--accent-cyan);
+        box-shadow: 0 0 8px var(--accent-cyan);
+        animation-delay: 1s;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.7);
+        }
+      }
+      .status-text {
+        font-size: 8px;
+        color: var(--text-dim);
+        letter-spacing: 0.3em;
+      }
+      .mode-tag {
+        font-size: 8px;
+        color: var(--accent-cyan);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        padding: 2px 8px;
+        border-radius: 20px;
+        letter-spacing: 0.2em;
+      }
+
+      /* Display area */
+      .display {
+        background: var(--bg-deep);
+        border: 1px solid rgba(0, 229, 255, 0.08);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 16px;
+        position: relative;
+        min-height: 110px;
+        overflow: hidden;
+      }
+      .display::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-cyan),
+          transparent
+        );
+        opacity: 0.4;
+      }
+      /* Scanline effect */
+      .display::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.05) 2px,
+          rgba(0, 0, 0, 0.05) 4px
+        );
+        pointer-events: none;
+        border-radius: 12px;
+      }
+
+      .expression {
+        font-size: 11px;
+        color: var(--text-dim);
+        text-align: right;
+        min-height: 20px;
+        letter-spacing: 0.1em;
+        word-break: break-all;
+        margin-bottom: 8px;
+      }
+      .result {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(28px, 8vw, 40px);
+        font-weight: 700;
+        text-align: right;
+        color: var(--text-primary);
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+        transition: all 0.15s ease;
+        word-break: break-all;
+        line-height: 1.1;
+      }
+      .result.error {
+        color: var(--accent-red);
+        text-shadow: var(--glow-red);
+        font-size: 20px;
+      }
+      .result.flash {
+        animation: displayFlash 0.2s ease;
+      }
+      @keyframes displayFlash {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+          color: var(--accent-cyan);
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Memory indicator */
+      .memory-bar {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+      }
+      .mem-chip {
+        font-size: 8px;
+        color: var(--text-dim);
+        border: 1px solid rgba(0, 229, 255, 0.1);
+        border-radius: 20px;
+        padding: 3px 8px;
+        letter-spacing: 0.2em;
+        transition: all 0.2s;
+      }
+      .mem-chip.active {
+        color: var(--accent-cyan);
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+      }
+
+      /* Button grid */
+      .btn-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+
+      /* Buttons */
+      .btn {
+        position: relative;
+        padding: 0;
+        height: 58px;
+        border: 1px solid rgba(0, 229, 255, 0.08);
+        border-radius: 10px;
+        background: var(--bg-btn);
+        color: var(--text-primary);
+        font-family: "Share Tech Mono", monospace;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        overflow: hidden;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.05em;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.03) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      .btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+      }
+
+      .btn:hover {
+        background: var(--bg-btn-hover);
+        border-color: rgba(0, 229, 255, 0.2);
+        transform: translateY(-1px);
+        box-shadow:
+          0 4px 15px rgba(0, 0, 0, 0.4),
+          0 0 10px rgba(0, 229, 255, 0.1);
+      }
+      .btn:active {
+        transform: translateY(1px) scale(0.96);
+        box-shadow: none;
+      }
+
+      /* Ripple */
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: rippleAnim 0.4s linear;
+        background: rgba(0, 229, 255, 0.2);
+        pointer-events: none;
+      }
+      @keyframes rippleAnim {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      /* Operator buttons */
+      .btn.op {
+        color: var(--accent-cyan);
+        border-color: rgba(0, 229, 255, 0.15);
+        background: rgba(0, 229, 255, 0.05);
+        font-family: "Orbitron", sans-serif;
+        font-size: 16px;
+      }
+      .btn.op:hover {
+        background: rgba(0, 229, 255, 0.12);
+        border-color: var(--accent-cyan);
+        box-shadow: var(--glow-cyan);
+        color: var(--accent-cyan);
+      }
+
+      /* Equals button */
+      .btn.eq {
+        background: linear-gradient(135deg, #0028a0, var(--accent-blue));
+        border-color: var(--accent-blue);
+        color: #fff;
+        font-family: "Orbitron", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        box-shadow: 0 0 15px rgba(41, 121, 255, 0.3);
+      }
+      .btn.eq:hover {
+        background: linear-gradient(135deg, var(--accent-blue), #5b9cff);
+        box-shadow:
+          var(--glow-blue),
+          0 4px 20px rgba(41, 121, 255, 0.4);
+        transform: translateY(-2px);
+      }
+
+      /* Clear button */
+      .btn.clr {
+        background: rgba(255, 23, 68, 0.08);
+        border-color: rgba(255, 23, 68, 0.2);
+        color: var(--accent-red);
+      }
+      .btn.clr:hover {
+        background: rgba(255, 23, 68, 0.15);
+        border-color: var(--accent-red);
+        box-shadow: var(--glow-red);
+      }
+
+      /* Function buttons */
+      .btn.fn {
+        color: var(--accent-orange);
+        border-color: rgba(255, 145, 0, 0.15);
+        background: rgba(255, 145, 0, 0.04);
+        font-size: 11px;
+      }
+      .btn.fn:hover {
+        background: rgba(255, 145, 0, 0.1);
+        border-color: var(--accent-orange);
+        box-shadow: 0 0 15px rgba(255, 145, 0, 0.3);
+      }
+
+      /* Zero button (wide) */
+      .btn.zero {
+        grid-column: span 2;
+      }
+
+      /* Memory buttons */
+      .btn.mem {
+        color: var(--accent-green);
+        border-color: rgba(0, 230, 118, 0.15);
+        background: rgba(0, 230, 118, 0.04);
+        font-size: 11px;
+      }
+      .btn.mem:hover {
+        background: rgba(0, 230, 118, 0.1);
+        border-color: var(--accent-green);
+        box-shadow: var(--glow-green);
+      }
+
+      /* Backspace */
+      .btn.back {
+        color: #ffcc00;
+        font-size: 18px;
+      }
+
+      /* Number buttons */
+      .btn.num:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(0, 229, 255, 0.15);
+      }
+
+      /* Active operator highlight */
+      .btn.op.active-op {
+        background: rgba(0, 229, 255, 0.15);
+        border-color: var(--accent-cyan);
+        box-shadow: var(--glow-cyan);
+      }
+
+      /* Footer */
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 14px;
+        padding: 0 4px;
+      }
+      .footer-text {
+        font-size: 8px;
+        color: rgba(74, 117, 153, 0.5);
+        letter-spacing: 0.3em;
+      }
+
+      /* Responsive */
+      @media (max-width: 400px) {
+        .calc {
+          padding: 14px;
+        }
+        .btn {
+          height: 52px;
+          font-size: 13px;
+        }
+        .btn-grid {
+          gap: 6px;
+        }
+      }
+      @media (max-width: 320px) {
+        .btn {
+          height: 46px;
+          font-size: 12px;
+        }
+        .btn-grid {
+          gap: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="wrapper">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-title">ABRAR CALC</div>
+        <div class="header-sub">QUANTUM COMPUTING UNIT v2.0</div>
+      </div>
+
+      <!-- Calculator -->
+      <div class="calc" id="calc">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <div style="display: flex; gap: 6px; align-items: center">
+            <div class="status-dot green"></div>
+            <div class="status-dot blue"></div>
+            <div class="status-dot cyan"></div>
+          </div>
+          <div class="status-text" id="statusText">SYSTEM READY</div>
+          <div class="mode-tag" id="modeTag">STD</div>
+        </div>
+
+        <!-- Display -->
+        <div class="display">
+          <div class="expression" id="expression">&nbsp;</div>
+          <div class="result" id="result">0</div>
+        </div>
+
+        <!-- Memory bar -->
+        <div class="memory-bar">
+          <div class="mem-chip" id="chipM">M: 0</div>
+          <div class="mem-chip" id="chipAns">ANS: 0</div>
+          <div class="mem-chip" id="chipDeg">DEG</div>
+        </div>
+
+        <!-- Button Grid -->
+        <div class="btn-grid" id="btnGrid">
+          <!-- Row 1: Memory + Clear -->
+          <button class="btn mem fn" id="btnMC" data-action="MC">MC</button>
+          <button class="btn mem fn" id="btnMR" data-action="MR">MR</button>
+          <button class="btn mem fn" id="btnMPlus" data-action="M+">M+</button>
+          <button class="btn clr" id="btnAC" data-action="AC">AC</button>
+
+          <!-- Row 2: Scientific functions -->
+          <button class="btn fn" data-action="sin">SIN</button>
+          <button class="btn fn" data-action="cos">COS</button>
+          <button class="btn fn" data-action="tan">TAN</button>
+          <button class="btn fn" data-action="sqrt">√</button>
+
+          <!-- Row 3: More functions -->
+          <button class="btn fn" data-action="log">LOG</button>
+          <button class="btn fn" data-action="ln">LN</button>
+          <button class="btn fn" data-action="pow2">x²</button>
+          <button class="btn fn" data-action="pi">π</button>
+
+          <!-- Row 4 -->
+          <button class="btn fn" data-action="(">(</button>
+          <button class="btn fn" data-action=")">)</button>
+          <button class="btn fn" data-action="percent">%</button>
+          <button class="btn back" data-action="backspace">⌫</button>
+
+          <!-- Row 5 -->
+          <button class="btn num" data-action="7">7</button>
+          <button class="btn num" data-action="8">8</button>
+          <button class="btn num" data-action="9">9</button>
+          <button class="btn op" data-action="÷">÷</button>
+
+          <!-- Row 6 -->
+          <button class="btn num" data-action="4">4</button>
+          <button class="btn num" data-action="5">5</button>
+          <button class="btn num" data-action="6">6</button>
+          <button class="btn op" data-action="×">×</button>
+
+          <!-- Row 7 -->
+          <button class="btn num" data-action="1">1</button>
+          <button class="btn num" data-action="2">2</button>
+          <button class="btn num" data-action="3">3</button>
+          <button class="btn op" data-action="−">−</button>
+
+          <!-- Row 8 -->
+          <button class="btn num zero" data-action="0">0</button>
+          <button class="btn num" data-action=".">.</button>
+          <button class="btn op" data-action="+">+</button>
+
+          <!-- Row 9: Equals (full width) -->
+          <button class="btn eq" style="grid-column: span 4" data-action="=">
+            =
+          </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <div class="footer-text">NEXUS © 2025</div>
+          <div class="footer-text" id="footerTime">--:--:--</div>
+          <div class="footer-text">SECURE MODE</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ─── Particles ───────────────────────────────────────────────
+      (function () {
+        const container = document.getElementById("particles");
+        for (let i = 0; i < 25; i++) {
+          const p = document.createElement("div");
+          p.className = "particle";
+          p.style.left = Math.random() * 100 + "%";
+          p.style.animationDuration = 8 + Math.random() * 15 + "s";
+          p.style.animationDelay = Math.random() * 10 + "s";
+          p.style.width = p.style.height = 1 + Math.random() * 2 + "px";
+          const colors = ["#00e5ff", "#2979ff", "#00e676"];
+          p.style.background = colors[Math.floor(Math.random() * 3)];
+          container.appendChild(p);
+        }
+      })();
+
+      // ─── Clock ────────────────────────────────────────────────────
+      (function clock() {
+        const el = document.getElementById("footerTime");
+        setInterval(() => {
+          const n = new Date();
+          el.textContent = [n.getHours(), n.getMinutes(), n.getSeconds()]
+            .map((v) => String(v).padStart(2, "0"))
+            .join(":");
+        }, 1000);
+      })();
+
+      // ─── Ripple effect ────────────────────────────────────────────
+      document.querySelectorAll(".btn").forEach((btn) => {
+        btn.addEventListener("pointerdown", (e) => {
+          const r = document.createElement("span");
+          r.className = "ripple";
+          const rect = btn.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          r.style.width = r.style.height = size + "px";
+          r.style.left = e.clientX - rect.left - size / 2 + "px";
+          r.style.top = e.clientY - rect.top - size / 2 + "px";
+          btn.appendChild(r);
+          setTimeout(() => r.remove(), 600);
+        });
+      });
+
+      // ─── Calculator Logic ─────────────────────────────────────────
+      const display = document.getElementById("result");
+      const exprEl = document.getElementById("expression");
+      const statusEl = document.getElementById("statusText");
+      const modeEl = document.getElementById("modeTag");
+      const chipM = document.getElementById("chipM");
+      const chipAns = document.getElementById("chipAns");
+      const chipDeg = document.getElementById("chipDeg");
+
+      let current = "0";
+      let expression = "";
+      let memory = 0;
+      let lastAns = 0;
+      let newNum = true;
+      let hasDot = false;
+      let useDeg = true;
+      let activeOp = null;
+      let firstVal = null;
+
+      function toRad(x) {
+        return useDeg ? (x * Math.PI) / 180 : x;
+      }
+
+      function setDisplay(val, isErr) {
+        display.textContent = val;
+        display.classList.toggle("error", !!isErr);
+        display.classList.add("flash");
+        setTimeout(() => display.classList.remove("flash"), 200);
+      }
+
+      function setStatus(msg) {
+        statusEl.textContent = msg;
+        setTimeout(() => {
+          statusEl.textContent = "SYSTEM READY";
+        }, 2000);
+      }
+
+      function updateChips() {
+        chipM.textContent = "M: " + formatNum(memory);
+        chipM.classList.toggle("active", memory !== 0);
+        chipAns.textContent = "ANS: " + formatNum(lastAns);
+        chipDeg.textContent = useDeg ? "DEG" : "RAD";
+        chipDeg.classList.add("active");
+      }
+
+      function formatNum(n) {
+        if (!isFinite(n)) return "ERROR";
+        if (Math.abs(n) >= 1e12 || (Math.abs(n) < 1e-7 && n !== 0))
+          return n.toExponential(4);
+        let s = parseFloat(n.toPrecision(12)).toString();
+        return s;
+      }
+
+      function highlightOp(op) {
+        document
+          .querySelectorAll(".btn.op")
+          .forEach((b) => b.classList.remove("active-op"));
+        if (op) {
+          document.querySelectorAll(".btn.op").forEach((b) => {
+            if (b.dataset.action === op) b.classList.add("active-op");
+          });
+        }
+      }
+
+      function compute() {
+        if (firstVal === null || activeOp === null) return parseFloat(current);
+        const a = firstVal,
+          b = parseFloat(current);
+        switch (activeOp) {
+          case "+":
+            return a + b;
+          case "−":
+            return a - b;
+          case "×":
+            return a * b;
+          case "÷":
+            return b === 0 ? NaN : a / b;
+          default:
+            return b;
+        }
+      }
+
+      function handleAction(action) {
+        // Numbers
+        if (/^[0-9]$/.test(action)) {
+          if (newNum) {
+            current = action;
+            newNum = false;
+            hasDot = false;
+          } else {
+            if (current.length < 15) current += action;
+          }
+          setDisplay(current);
+          modeEl.textContent = "INPUT";
+          return;
+        }
+
+        // Decimal
+        if (action === ".") {
+          if (newNum) {
+            current = "0.";
+            newNum = false;
+            hasDot = true;
+          } else if (!hasDot) {
+            current += ".";
+            hasDot = true;
+          }
+          setDisplay(current);
+          return;
+        }
+
+        // Operators
+        if (["+", "−", "×", "÷"].includes(action)) {
+          const val = compute();
+          if (!isNaN(val)) firstVal = val;
+          else firstVal = parseFloat(current);
+          activeOp = action;
+          newNum = true;
+          hasDot = false;
+          expression = formatNum(firstVal) + " " + action;
+          exprEl.textContent = expression;
+          highlightOp(action);
+          modeEl.textContent = "OPER";
+          return;
+        }
+
+        // Equals
+        if (action === "=") {
+          const result = compute();
+          expression = exprEl.textContent + " " + current + " =";
+          exprEl.textContent = expression;
+          if (!isFinite(result) || isNaN(result)) {
+            setDisplay("ERR", true);
+            setStatus("DIVISION ERROR");
+          } else {
+            lastAns = result;
+            current = formatNum(result);
+            setDisplay(current);
+            setStatus("COMPUTED");
+            modeEl.textContent = "RES";
+          }
+          firstVal = null;
+          activeOp = null;
+          newNum = true;
+          hasDot = current.includes(".");
+          highlightOp(null);
+          updateChips();
+          return;
+        }
+
+        // AC / CE
+        if (action === "AC") {
+          current = "0";
+          expression = "";
+          firstVal = null;
+          activeOp = null;
+          newNum = true;
+          hasDot = false;
+          exprEl.innerHTML = "&nbsp;";
+          setDisplay("0");
+          highlightOp(null);
+          setStatus("CLEARED");
+          modeEl.textContent = "STD";
+          return;
+        }
+
+        // Backspace
+        if (action === "backspace") {
+          if (!newNum && current.length > 1) {
+            if (current.slice(-1) === ".") hasDot = false;
+            current = current.slice(0, -1);
+          } else {
+            current = "0";
+            newNum = true;
+            hasDot = false;
+          }
+          setDisplay(current);
+          return;
+        }
+
+        // Percent
+        if (action === "percent") {
+          const v = parseFloat(current) / 100;
+          current = formatNum(v);
+          hasDot = current.includes(".");
+          setDisplay(current);
+          return;
+        }
+
+        // Parentheses (append to expression display only)
+        if (action === "(" || action === ")") {
+          expression += action;
+          exprEl.textContent = expression;
+          return;
+        }
+
+        // Scientific functions
+        const val = parseFloat(current);
+        let res;
+        switch (action) {
+          case "sin":
+            res = Math.sin(toRad(val));
+            setStatus("SIN APPLIED");
+            break;
+          case "cos":
+            res = Math.cos(toRad(val));
+            setStatus("COS APPLIED");
+            break;
+          case "tan":
+            res = Math.tan(toRad(val));
+            setStatus("TAN APPLIED");
+            break;
+          case "sqrt":
+            res = Math.sqrt(val);
+            setStatus("√ APPLIED");
+            break;
+          case "log":
+            res = Math.log10(val);
+            setStatus("LOG₁₀ APPLIED");
+            break;
+          case "ln":
+            res = Math.log(val);
+            setStatus("LN APPLIED");
+            break;
+          case "pow2":
+            res = val * val;
+            setStatus("x² APPLIED");
+            break;
+          case "pi":
+            res = Math.PI;
+            newNum = false;
+            setStatus("π INSERTED");
+            break;
+          default:
+            return;
+        }
+        if (!isFinite(res) || isNaN(res)) {
+          setDisplay("ERR", true);
+          setStatus("MATH ERROR");
+          return;
+        }
+        lastAns = res;
+        current = formatNum(res);
+        hasDot = current.includes(".");
+        newNum = true;
+        expression = action.toUpperCase() + "(" + formatNum(val) + ") =";
+        exprEl.textContent = expression;
+        setDisplay(current);
+        modeEl.textContent = "FUNC";
+        updateChips();
+      }
+
+      // Memory
+      function handleMem(action) {
+        if (action === "MC") {
+          memory = 0;
+          setStatus("MEM CLEARED");
+        }
+        if (action === "MR") {
+          current = formatNum(memory);
+          hasDot = current.includes(".");
+          newNum = true;
+          setDisplay(current);
+          setStatus("MEM RECALLED");
+        }
+        if (action === "M+") {
+          memory += parseFloat(current);
+          setStatus("MEM STORED");
+        }
+        updateChips();
+      }
+
+      // Keyboard support
+      document.addEventListener("keydown", (e) => {
+        const k = e.key;
+        if (/^[0-9]$/.test(k)) handleAction(k);
+        else if (k === ".") handleAction(".");
+        else if (k === "+") handleAction("+");
+        else if (k === "-") handleAction("−");
+        else if (k === "*") handleAction("×");
+        else if (k === "/") {
+          e.preventDefault();
+          handleAction("÷");
+        } else if (k === "Enter" || k === "=") handleAction("=");
+        else if (k === "Backspace") handleAction("backspace");
+        else if (k === "Escape") handleAction("AC");
+        else if (k === "%") handleAction("percent");
+      });
+
+      // Button click delegation
+      document.getElementById("btnGrid").addEventListener("click", (e) => {
+        const btn = e.target.closest(".btn");
+        if (!btn) return;
+        const action = btn.dataset.action;
+        if (["MC", "MR", "M+"].includes(action)) handleMem(action);
+        else handleAction(action);
+      });
+
+      // DEG/RAD toggle on chipDeg
+      chipDeg.addEventListener("click", () => {
+        useDeg = !useDeg;
+        chipDeg.textContent = useDeg ? "DEG" : "RAD";
+        setStatus(useDeg ? "MODE: DEGREE" : "MODE: RADIAN");
+      });
+
+      updateChips();
+    </script>
+  </body>
+</html>
